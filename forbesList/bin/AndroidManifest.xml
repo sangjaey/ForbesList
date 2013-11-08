@@ -22,6 +22,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="project.forbeslist.JoinActivity"
+            android:label="@string/title_activity_join" >
+        </activity>
+        <activity
+            android:name="project.forbeslist.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="project.forbeslist.UploadActivity"
+            android:label="@string/title_activity_upload" >
+        </activity>
+        <activity
+            android:name="project.forbeslist.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="project.forbeslist.MyUploadsActivity"
+            android:label="@string/title_activity_my_uploads" >
+        </activity>
+        <activity
+            android:name="project.forbeslist.DetailActivity"
+            android:label="@string/title_activity_detail" >
+        </activity>
     </application>
 
 </manifest>
