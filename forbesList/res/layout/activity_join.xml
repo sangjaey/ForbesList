@@ -105,13 +105,13 @@
 
     <Button
         android:id="@+id/button1"
-        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="62dp"
-        android:background="@drawable/button_selector"
+        android:background="@drawable/button_shape_base"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:text="@string/register" />
 
