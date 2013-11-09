@@ -25,5 +25,23 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+    <string name="titleExample">Java for Dummies</string>
+    <string name="imgContentDescription">img of book</string>
+    <string name="uploader">Uploader</string>
+    <string name="Price">Price</string>
+    <string name="Location">Location</string>
+    <string name="Phone">Phone</string>
+    <string name="nameExample">Sung Jae Lee</string>
+    <string name="Email">Email</string>
+    <string name="examplePrice">$ 50</string>
+    <string name="exampleLocation">Pittsburgh, PA</string>
+    <string name="examplePhone">412 213 1231</string>
+    <string name="exampleEmail">example@gmail.com</string>
+    <string name="examplePw">******</string>
+    <string name="pw">PW</string>
+    <string name="login">Login</string>
+    <string name="search">Search</string>
+    <string name="upload">Upload</string>
+    <string name="takeSnapShot">Take Snapshot Now</string>
 
 </resources>

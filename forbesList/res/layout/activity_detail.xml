@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Java for Dummies"
+        android:text="@string/titleExample"
         android:textColor="#0099cc"
         android:textSize="30sp" />
 
@@ -25,6 +25,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="31dp"
+        android:contentDescription="@string/imgContentDescription"
         android:src="@drawable/book" />
 
     <TextView
@@ -34,7 +35,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/imageView1"
         android:layout_marginTop="21dp"
-        android:text="Uploader"
+        android:text="@string/uploader"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -45,7 +46,7 @@
         android:layout_alignRight="@+id/TextView01"
         android:layout_below="@+id/TextView01"
         android:layout_marginTop="10dp"
-        android:text="Price"
+        android:text="@string/Price"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -56,7 +57,7 @@
         android:layout_alignRight="@+id/TextView02"
         android:layout_below="@+id/TextView02"
         android:layout_marginTop="10dp"
-        android:text="Location"
+        android:text="@string/Location"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -67,7 +68,7 @@
         android:layout_alignRight="@+id/TextView03"
         android:layout_below="@+id/TextView03"
         android:layout_marginTop="10dp"
-        android:text="Phone"
+        android:text="@string/Phone"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -78,7 +79,7 @@
         android:layout_alignLeft="@+id/TextView02"
         android:layout_below="@+id/TextView04"
         android:layout_marginTop="10dp"
-        android:text="Email"
+        android:text="@string/Email"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -89,7 +90,7 @@
         android:layout_alignBaseline="@+id/TextView01"
         android:layout_alignBottom="@+id/TextView01"
         android:layout_alignParentRight="true"
-        android:text="Sung Jae Lee"
+        android:text="@string/nameExample"
         android:textSize="16sp" />
 
     <TextView
@@ -98,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/TextView03"
         android:layout_alignLeft="@+id/TextView06"
-        android:text="$ 50"
+        android:text="@string/examplePrice"
         android:textSize="16sp" />
 
     <TextView
@@ -107,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/TextView04"
         android:layout_alignLeft="@+id/TextView07"
-        android:text="Pittsburgh, PA"
+        android:text="@string/exampleLocation"
         android:textSize="16sp" />
 
     <TextView
@@ -117,7 +118,7 @@
         android:layout_alignBaseline="@+id/TextView04"
         android:layout_alignBottom="@+id/TextView04"
         android:layout_alignLeft="@+id/TextView08"
-        android:text="412-123-1234"
+        android:text="@string/examplePhone"
         android:textSize="16sp" />
 
     <TextView
@@ -127,7 +128,7 @@
         android:layout_alignBaseline="@+id/TextView05"
         android:layout_alignBottom="@+id/TextView05"
         android:layout_alignLeft="@+id/TextView09"
-        android:text="sj86@gmail.com"
+        android:text="@string/exampleEmail"
         android:textSize="16sp" />
 
 </RelativeLayout>

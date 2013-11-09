@@ -29,7 +29,7 @@
         android:layout_marginLeft="18dp"
         android:layout_toRightOf="@+id/textView2"
         android:ems="10"
-        android:hint="Type your email"
+        android:hint="@string/exampleEmail"
         android:inputType="textEmailAddress" />
 
     <requestFocus />
@@ -41,7 +41,7 @@
         android:layout_alignRight="@+id/email"
         android:layout_centerVertical="true"
         android:ems="10"
-        android:hint="*******"
+        android:hint="@string/examplePw"
         android:inputType="textPassword" >
     </EditText>
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/pw"
         android:layout_toLeftOf="@+id/email"
-        android:text="PW"
+        android:text="@string/pw"
         android:textColor="@color/DarkOrange"
         android:textSize="15sp"
         android:typeface="serif" />
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/email"
         android:layout_alignLeft="@+id/tabText"
-        android:text="EMail"
+        android:text="@string/email"
         android:textColor="@color/DarkOrange"
         android:textSize="15sp"
         android:typeface="serif" />
@@ -77,7 +77,7 @@
         android:background="@color/white"
         android:minHeight="30dip"
         android:minWidth="90dip"
-        android:text="REGISTER"
+        android:text="@string/register"
         android:textColor="@color/Orange"
         android:textSize="25sp" />
 
@@ -91,7 +91,7 @@
         android:background="@color/white"
         android:minHeight="30dip"
         android:minWidth="90dip"
-        android:text="LOGIN"
+        android:text="@string/login"
         android:textColor="@color/Orange"
         android:textSize="25sp" />
 

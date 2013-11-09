@@ -36,7 +36,7 @@
         android:layout_alignBottom="@+id/search_author"
         android:layout_alignLeft="@+id/title_s"
         android:ems="10"
-        android:hint="Author of the book" >
+        android:hint="@string/search_author" >
 
         <requestFocus />
     </EditText>
@@ -49,7 +49,7 @@
         android:layout_marginLeft="14dp"
         android:layout_toRightOf="@+id/search_author"
         android:ems="10" 
-        android:hint="Title of the book"/>
+        android:hint="@string/search_title"/>
 
     <Button
         android:id="@+id/button_s"
@@ -59,6 +59,6 @@
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
         android:background="#0099cc"
-        android:text="SEARCH" />
+        android:text="@string/search" />
 
 </RelativeLayout>

@@ -198,10 +198,10 @@ public final class R {
         public static final int TextView09=0x7f09000a;
         public static final int TextView10=0x7f09000b;
         public static final int action_settings=0x7f090027;
-        public static final int author_s=0x7f09001f;
+        public static final int author_s=0x7f09001e;
         public static final int author_u=0x7f090023;
         public static final int button1=0x7f090011;
-        public static final int button_s=0x7f090017;
+        public static final int button_s=0x7f090020;
         public static final int button_u=0x7f090025;
         public static final int editText1=0x7f09000d;
         public static final int editText2=0x7f09000e;
@@ -210,19 +210,19 @@ public final class R {
         public static final int email=0x7f090012;
         public static final int email_p=0x7f090019;
         public static final int imageView1=0x7f090001;
-        public static final int image_p=0x7f09001c;
-        public static final int phone_p=0x7f090018;
-        public static final int profile_email=0x7f09001b;
-        public static final int profile_phone=0x7f09001a;
+        public static final int image_p=0x7f09001b;
+        public static final int phone_p=0x7f090017;
+        public static final int profile_email=0x7f09001a;
+        public static final int profile_phone=0x7f090018;
         public static final int pw=0x7f090013;
         public static final int register=0x7f090016;
-        public static final int search_author=0x7f09001d;
-        public static final int search_title=0x7f09001e;
+        public static final int search_author=0x7f09001c;
+        public static final int search_title=0x7f09001d;
         public static final int tabText=0x7f09000c;
         public static final int textView1=0x7f090000;
         public static final int textView2=0x7f090014;
         public static final int textView3=0x7f090015;
-        public static final int title_s=0x7f090020;
+        public static final int title_s=0x7f09001f;
         public static final int title_u=0x7f090024;
         public static final int upload_author=0x7f090021;
         public static final int upload_snapshot=0x7f090026;
@@ -249,20 +249,36 @@ public final class R {
         public static final int upload=0x7f080007;
     }
     public static final class string {
+        public static final int Email=0x7f06001f;
+        public static final int Location=0x7f06001c;
+        public static final int Phone=0x7f06001d;
+        public static final int Price=0x7f06001b;
         public static final int action_settings=0x7f060002;
         public static final int app_name=0x7f060000;
         public static final int email=0x7f06000a;
+        public static final int exampleEmail=0x7f060023;
+        public static final int exampleLocation=0x7f060021;
+        public static final int examplePhone=0x7f060022;
+        public static final int examplePrice=0x7f060020;
+        public static final int examplePw=0x7f060024;
         public static final int fname=0x7f06000c;
         public static final int hello_world=0x7f060003;
+        public static final int imgContentDescription=0x7f060019;
         public static final int join_title=0x7f060001;
         public static final int lname=0x7f06000d;
+        public static final int login=0x7f060026;
         public static final int name=0x7f06000b;
+        public static final int nameExample=0x7f06001e;
         public static final int password=0x7f06000f;
         public static final int phone=0x7f06000e;
+        public static final int pw=0x7f060025;
         public static final int register=0x7f060010;
+        public static final int search=0x7f060027;
         public static final int search_author=0x7f060012;
         public static final int search_title=0x7f060011;
         public static final int snap=0x7f060013;
+        public static final int takeSnapShot=0x7f060029;
+        public static final int titleExample=0x7f060018;
         public static final int title_activity_detail=0x7f060009;
         public static final int title_activity_join=0x7f060004;
         public static final int title_activity_my_uploads=0x7f060008;
@@ -273,6 +289,8 @@ public final class R {
         public static final int title_section1=0x7f060015;
         public static final int title_section2=0x7f060016;
         public static final int title_section3=0x7f060017;
+        public static final int upload=0x7f060028;
+        public static final int uploader=0x7f06001a;
     }
     public static final class style {
         /** 

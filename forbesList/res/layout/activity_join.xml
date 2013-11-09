@@ -65,6 +65,7 @@
 
     <EditText
         android:id="@+id/editText1"
+        android:hint="@string/exampleEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/TextView01"
@@ -73,6 +74,7 @@
 
     <EditText
         android:id="@+id/editText2"
+        android:hint="@string/nameExample"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/TextView02"
@@ -86,6 +88,7 @@
 
     <EditText
         android:id="@+id/editText3"
+        android:hint="@string/examplePhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/editText2"
@@ -95,6 +98,7 @@
 
     <EditText
         android:id="@+id/editText4"
+        android:hint="@string/examplePw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/TextView04"
