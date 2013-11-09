@@ -208,12 +208,12 @@ public final class R {
         public static final int editText3=0x7f09000f;
         public static final int editText4=0x7f090010;
         public static final int email=0x7f090012;
-        public static final int email_p=0x7f090019;
+        public static final int email_p=0x7f09001b;
         public static final int imageView1=0x7f090001;
-        public static final int image_p=0x7f09001b;
-        public static final int phone_p=0x7f090017;
-        public static final int profile_email=0x7f09001a;
-        public static final int profile_phone=0x7f090018;
+        public static final int image_p=0x7f090019;
+        public static final int phone_p=0x7f090018;
+        public static final int profile_email=0x7f090017;
+        public static final int profile_phone=0x7f09001a;
         public static final int pw=0x7f090013;
         public static final int register=0x7f090016;
         public static final int search_author=0x7f09001c;
