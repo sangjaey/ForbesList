@@ -95,13 +95,4 @@
         android:textColor="@color/Orange"
         android:textSize="25sp" />
 
-    <ImageButton
-        android:id="@+id/imageButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:src="@android:drawable/btn_star" />
-
 </RelativeLayout>
