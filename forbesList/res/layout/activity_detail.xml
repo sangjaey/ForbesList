@@ -9,8 +9,125 @@
     tools:context=".DetailActivity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Java for Dummies"
+        android:textColor="#0099cc"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:src="@drawable/book" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="21dp"
+        android:text="Uploader"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/TextView01"
+        android:layout_below="@+id/TextView01"
+        android:layout_marginTop="10dp"
+        android:text="Price"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/TextView02"
+        android:layout_below="@+id/TextView02"
+        android:layout_marginTop="10dp"
+        android:text="Location"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/TextView03"
+        android:layout_below="@+id/TextView03"
+        android:layout_marginTop="10dp"
+        android:text="Phone"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_below="@+id/TextView04"
+        android:layout_marginTop="10dp"
+        android:text="Email"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView06"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView01"
+        android:layout_alignBottom="@+id/TextView01"
+        android:layout_alignParentRight="true"
+        android:text="Sung Jae Lee"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/TextView07"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView03"
+        android:layout_alignLeft="@+id/TextView06"
+        android:text="$ 50"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/TextView08"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView04"
+        android:layout_alignLeft="@+id/TextView07"
+        android:text="Pittsburgh, PA"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/TextView09"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView04"
+        android:layout_alignBottom="@+id/TextView04"
+        android:layout_alignLeft="@+id/TextView08"
+        android:text="412-123-1234"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/TextView10"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView05"
+        android:layout_alignBottom="@+id/TextView05"
+        android:layout_alignLeft="@+id/TextView09"
+        android:text="sj86@gmail.com"
+        android:textSize="16sp" />
 
 </RelativeLayout>
