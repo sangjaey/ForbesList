@@ -68,7 +68,7 @@
         android:typeface="serif" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -85,7 +85,7 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Button01"
+        android:layout_above="@+id/register"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
         android:background="@color/white"
