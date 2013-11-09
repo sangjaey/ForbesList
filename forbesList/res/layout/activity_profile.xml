@@ -8,9 +8,75 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ProfileActivity" >
 
-    <TextView
+    <Button
+        android:id="@+id/button_s"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="#0099cc"
+        android:text="SEARCH" />
+
+    <EditText
+        android:id="@+id/phone_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/email_p"
+        android:layout_alignBottom="@+id/profile_phone"
+        android:ems="10"
+        android:hint="Phone" />
+
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/phone_p"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="22dp"
+        android:layout_marginLeft="17dp"
+        android:text="@string/email"
+        android:textColor="#0099cc" />
+
+    <EditText
+        android:id="@+id/email_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/profile_email"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:hint="Email" />
+
+    <TextView
+        android:id="@+id/profile_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_s"
+        android:layout_alignLeft="@+id/profile_email"
+        android:layout_marginBottom="50dp"
+        android:text="@string/phone"
+        android:textColor="#0099cc" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30dip"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:textColor="#0099cc"
+        android:text="Jane Doe" />
+
+    <ImageView
+        android:id="@+id/image_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

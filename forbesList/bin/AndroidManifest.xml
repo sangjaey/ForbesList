@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
     <application
@@ -45,6 +45,10 @@
         <activity
             android:name="project.forbeslist.DetailActivity"
             android:label="@string/title_activity_detail" >
+        </activity>
+        <activity
+            android:name="project.forbeslist.TabMainActivity"
+            android:label="@string/title_activity_tab_main" >
         </activity>
     </application>
 

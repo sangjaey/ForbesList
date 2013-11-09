@@ -9,8 +9,77 @@
     tools:context=".UploadActivity" >
 
     <TextView
+        android:id="@+id/upload_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="77dp"
+        android:textColor="#0099cc"
+        android:text="@string/search_author" />
+
+    <TextView
+        android:id="@+id/upload_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/upload_author"
+        android:layout_alignLeft="@+id/upload_author"
+        android:layout_marginBottom="45dp"
+        android:textColor="#0099cc"
+        android:text="@string/search_title" />
+
+    <EditText
+        android:id="@+id/author_u"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/upload_author"
+        android:layout_alignLeft="@+id/title_u"
+        android:ems="10"
+        android:hint="Author of the book" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/title_u"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/upload_title"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/upload_author"
+        android:ems="10" 
+        android:hint="Title of the book"/>
+
+    <Button
+        android:id="@+id/button_u"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="#0099cc"
+        android:text="UPLOAD" />
+
+    <TextView
+        android:id="@+id/upload_snapshot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/upload_author"
+        android:layout_below="@+id/upload_author"
+        android:layout_marginTop="32dp"
+        android:text="@string/snap"
+        android:textColor="#0099cc" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/upload_snapshot"
+        android:layout_below="@+id/upload_snapshot"
+        android:layout_marginTop="18dp"
+        android:textColor="#ffffff"
+        android:background="#0099cc"
+        android:text="Take Snapshot Now" />
 
 </RelativeLayout>

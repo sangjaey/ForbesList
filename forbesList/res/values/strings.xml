@@ -11,12 +11,19 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_my_uploads">MyUploadsActivity</string>
     <string name="title_activity_detail">DetailActivity</string>
-    
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="fname">First Name</string>
     <string name="lname">Last Name</string>
     <string name="phone">Phone</string>
     <string name="password">Password</string>
-	<string name="register"> Register </string>
+    <string name="register"> Register </string>
+    <string name="search_title">Title </string>
+    <string name="search_author">Author </string>
+    <string name="snap">Snapshot of the Book </string>
+    <string name="title_activity_tab_main">TabMainActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
 </resources>
