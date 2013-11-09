@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	Button joinButton;
+	Button joinButton,button1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,19 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 					// go to next activity with 3 values passed
 					Intent intent = new Intent(context, JoinActivity.class);
+					startActivity(intent);
+			}
+		});
+	}
+	
+	public void addListenerOnButton2() {
+		final Context context = this;
+		joinButton = (Button) findViewById(R.id.button1);
+		joinButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+					// go to next activity with 3 values passed
+					Intent intent = new Intent(context, TabMainActivity.class);
 					startActivity(intent);
 			}
 		});
