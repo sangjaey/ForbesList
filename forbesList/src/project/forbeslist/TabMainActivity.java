@@ -21,18 +21,23 @@ public class TabMainActivity extends TabActivity {
 		TabSpec tabSpecSearch = tabHost
 		  .newTabSpec("Search")
 		  .setContent(intentSearch);
+		tabSpecSearch.setIndicator("search");
  
 		// Upload tab
 		Intent intentUpload = new Intent().setClass(this, UploadActivity.class);
 		TabSpec tabSpecUpload = tabHost
 		  .newTabSpec("Upload")
 		  .setContent(intentUpload);
+		tabSpecUpload.setIndicator("upload");
+
  
 		// Profile tab
 		Intent intentProfile = new Intent().setClass(this, ProfileActivity.class);
 		TabSpec tabSpecProfile = tabHost
 		  .newTabSpec("Profile")
 		  .setContent(intentProfile);
+		tabSpecProfile.setIndicator("profile");
+
  
 
 		// add all tabs 
@@ -41,7 +46,7 @@ public class TabMainActivity extends TabActivity {
 		tabHost.addTab(tabSpecProfile);
  
 		//set Windows tab as default (zero based)
-		tabHost.setCurrentTab(0);
+		tabHost.setCurrentTab(1);
 	}
  
 }
