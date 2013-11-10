@@ -9,8 +9,37 @@
     tools:context=".MyUploadsActivity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="My Uploads"
+        android:textColor="#0099cc"
+        android:textSize="30dip"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp"
+        android:background="#0099cc"
+        android:text="Back to Profile"
+        android:textColor="#ffffff" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_s"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true" 
+        android:textColor="#0099CC">
+
+    </ListView>
 
 </RelativeLayout>
