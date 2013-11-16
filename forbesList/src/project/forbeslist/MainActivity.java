@@ -33,6 +33,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements CBHelperResponder {
 	Button joinButton,button1;
+	
+	public static CBHelper myHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +43,11 @@ public class MainActivity extends Activity implements CBHelperResponder {
         addListenerOnButton();
         addListenerOnButton2();
         JSONObject in = null;
-    	CBHelper myHelper = new CBHelper(
+    	myHelper = new CBHelper(
     	        "forbeslist",
     	        "cac21deef7dd81d8af7506cd257173d2", 
     	        this);
     	myHelper.setPassword(md5("1234"));
-    	String objectToInsert = "hi";
     	try {
 			 in= new JSONObject().put("name", "sangwon");
 		} catch (JSONException e) {
