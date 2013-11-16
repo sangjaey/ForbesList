@@ -5,7 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/cbhelper.jar"/>
 	<classpathentry kind="lib" path="libs/gson-2.2.1.jar"/>
-	<classpathentry kind="lib" path="libs/java-json.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>

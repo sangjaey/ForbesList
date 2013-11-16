@@ -1,5 +1,10 @@
 package project.forbeslist;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.cloudbase.CBHelper;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -25,6 +30,17 @@ public class JoinActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 					// go to next activity with 3 values passed
+				
+				 	JSONObject in = null;
+
+			    	MainActivity.myHelper.setPassword(Util.md5("1234"));
+			    	try {
+						 in= new JSONObject().put("name2", "sangwon2");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			    	MainActivity.myHelper.insertDocument(in, "test");
 					Intent intent = new Intent(context, TabMainActivity.class);
 					startActivity(intent);
 			}
