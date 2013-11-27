@@ -197,7 +197,7 @@ public final class R {
         public static final int TextView08=0x7f090009;
         public static final int TextView09=0x7f09000a;
         public static final int TextView10=0x7f09000b;
-        public static final int action_settings=0x7f090028;
+        public static final int action_settings=0x7f090029;
         public static final int author_s=0x7f090020;
         public static final int author_u=0x7f090024;
         public static final int button1=0x7f090011;
@@ -209,6 +209,7 @@ public final class R {
         public static final int editText4=0x7f090010;
         public static final int email=0x7f090012;
         public static final int email_p=0x7f09001d;
+        public static final int imageView=0x7f090028;
         public static final int imageView1=0x7f090001;
         public static final int image_p=0x7f09001b;
         public static final int listView1=0x7f090018;
