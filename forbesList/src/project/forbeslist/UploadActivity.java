@@ -44,8 +44,14 @@ public class UploadActivity extends Activity {
 			public void onClick(View arg0) {
         		MainActivity.myHelper.setUseLocation(true);
 				Location location = mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-				if (location!=null) MainActivity.myHelper.setCurrentLocation(location);
-				Toast.makeText(getBaseContext(), "Current loc: lon: "+ location.getLongitude() + "lat: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+				if (location!=null) {
+					MainActivity.myHelper.setCurrentLocation(location);
+					Toast.makeText(getBaseContext(), "Current loc: lon: "+ location.getLongitude() + "lat: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+				}
+				else 					
+					Toast.makeText(getBaseContext(), "No loc detected", Toast.LENGTH_SHORT).show();
+
+				
 				boolean nonNullFlag = false;
 				EditText tText = (EditText) findViewById(R.id.title_u);
 				EditText aText = (EditText) findViewById(R.id.author_u);
