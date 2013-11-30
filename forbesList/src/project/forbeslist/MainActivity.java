@@ -36,7 +36,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements CBHelperResponder {
 	Button joinButton, button1;
 	public static CBHelper myHelper;
-	String pw;
+	String pw,email;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,7 @@ public class MainActivity extends Activity implements CBHelperResponder {
 				EditText emailText = (EditText) findViewById(R.id.email);
 				EditText passwordText = (EditText) findViewById(R.id.pw);
 
-				String email = emailText.getText().toString();
+				email = emailText.getText().toString();
 				pw = passwordText.getText().toString();
 
 				CBSearchCondition cond = new CBSearchCondition(
@@ -125,6 +125,7 @@ public class MainActivity extends Activity implements CBHelperResponder {
 				String pass = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("password");
 				if(pw.equals(pass)){
 					Intent intent = new Intent(this, TabMainActivity.class);
+					intent.putExtra("userEmail", email);
 					startActivity(intent);
 				}
 				else{
