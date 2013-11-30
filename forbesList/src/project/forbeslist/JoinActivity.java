@@ -79,14 +79,6 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 		
 		// TODO Auto-generated method stub
-		if(arg1==null){
-			System.out.println("NULL RETURNED");
-			validEmail = true;
-		}
-
-		if(!arg1.isSuccess())
-			System.out.println("NOt SUCCESSFULL");
-
 		
 		if (arg1.getData() instanceof List) {
 			List results = (List) arg1.getData();

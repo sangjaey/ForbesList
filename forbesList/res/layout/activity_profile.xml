@@ -20,26 +20,15 @@
         android:textColor="#0099cc" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/name_p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
-        android:text="@string/nameExample"
         android:textColor="#0099cc"
         android:textSize="30sp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/image_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:contentDescription="@string/imgContentDescription"
-        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/profile_phone"
@@ -51,30 +40,24 @@
         android:text="@string/phone"
         android:textColor="#0099cc" />
 
-    <EditText
+   <TextView
         android:id="@+id/phone_p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/profile_phone"
         android:layout_alignBottom="@+id/profile_phone"
         android:layout_alignLeft="@+id/email_p"
-        android:ems="10"
-        android:hint="@string/phone"
-        android:inputType="phone" >
+        android:ems="10">
+    </TextView>
 
-        <requestFocus />
-    </EditText>
-
-    <EditText
+    <TextView
         android:id="@+id/email_p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/profile_email"
         android:layout_alignBottom="@+id/profile_email"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/name_p"
         android:layout_marginLeft="15dp"
-        android:ems="10"
-        android:hint="@string/exampleEmail"
-        android:inputType="textEmailAddress" />
+        android:ems="10"/>
 
 </RelativeLayout>
