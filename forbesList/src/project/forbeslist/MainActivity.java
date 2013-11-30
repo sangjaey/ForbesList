@@ -5,6 +5,7 @@ package project.forbeslist;
 import com.cloudbase.*;
 import com.cloudbase.datacommands.CBSearchCondition;
 import com.cloudbase.datacommands.CBSearchConditionOperator;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -134,9 +135,9 @@ public class MainActivity extends Activity implements CBHelperResponder {
 					+ ((List) arg1.getData()).size());
 			if (((List) arg1.getData()).size() != 0) {
 				String s = (((List) arg1.getData()).get(0)).toString();
-				System.out.println(((List) arg1.getData()).get(0));
-				User newUser = (User)((List) arg1.getData()).get(0);
-						System.out.println(newUser.getEmail());
+				System.out.println(((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("email"));
+				
+						
 	/*			JSONObject result;
 				try {
 					result = new JSONObject(s);
