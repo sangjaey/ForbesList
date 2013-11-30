@@ -3,9 +3,6 @@ package project.forbeslist;
 
 import java.io.File;
 import java.util.ArrayList;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -59,26 +56,21 @@ public class UploadActivity extends Activity {
                 String title = tText.getText().toString();
                 String author = aText.getText().toString();
                 nonNullFlag = !(title.equals("") || author.equals(""));
-                JSONObject in = null;
+                Book in = null;
         	    if(nonNullFlag){
         	    	//put in database
 
-        	    	//TODO
-        	    	try {
-			    		 in = new JSONObject();
-			    		 in.put("title", title);
-			    		 in.put("author", author);
-			    		 in.put("location", location);
-			    		 if (photo!=null){
-			    			 ArrayList<File> files = new ArrayList<File>();
-			        	     files.add(photo); 
-			        	     MainActivity.myHelper.insertDocument(in, "test", files, r);
-			    		 }
-			    		 else MainActivity.myHelper.insertDocument(in, "test");
-			    		 
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
+        	    	/*in = new JSONObject();
+					 in.put("title", title);
+					 in.put("author", author);
+					 in.put("location", location);*/
+					 in = new Book(title, author, location, photo);
+					 if (photo!=null){
+						 ArrayList<File> files = new ArrayList<File>();
+					     files.add(photo); 
+					     MainActivity.myHelper.insertDocument(in, "Books", files, r);
+					 }
+					 else MainActivity.myHelper.insertDocument(in, "Books");
         	    	
         	    	//toast to say upload done.
         	    	Context context = getApplicationContext();
@@ -116,14 +108,14 @@ public class UploadActivity extends Activity {
 			@Override
 			public void onLocationChanged(Location location)
 			{
-			//if (location != null)
-			//{
+			if (location != null)
+			{
 				Toast.makeText(getBaseContext(),
 				"New location latitude [" +
 				location.getLatitude() +
 				"] longitude [" + 						location.getLongitude()+"]",
 				Toast.LENGTH_SHORT).show();
-			//}
+			}
 			}
 
 
