@@ -62,7 +62,7 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 					error_text.setText("Email Already In use");
 					return;
 				}
-				User newUser = new User(email, password, name);
+				User newUser = new User(email, password, name,phonenumber);
 
 				MainActivity.myHelper.insertDocument(newUser, "test");
 				Intent intent = new Intent(context, TabMainActivity.class);
