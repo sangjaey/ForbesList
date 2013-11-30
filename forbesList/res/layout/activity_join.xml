@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/TextView01"
         android:layout_toRightOf="@+id/TextView01"
+        android:inputType="textEmailAddress"
         android:ems="10" />
 
     <EditText
@@ -94,6 +95,7 @@
         android:layout_alignRight="@+id/editText2"
         android:layout_alignTop="@+id/TextView03"
         android:layout_toRightOf="@+id/TextView03"
+        android:inputType="phone"
         android:ems="10" />
 
     <EditText
@@ -105,6 +107,7 @@
         android:layout_alignBottom="@+id/TextView04"
         android:layout_alignRight="@+id/editText3"
         android:layout_toRightOf="@+id/TextView04"
+        android:inputType="textPassword"
         android:ems="10" />
 
     <Button
