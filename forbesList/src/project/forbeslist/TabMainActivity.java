@@ -16,8 +16,11 @@ public class TabMainActivity extends TabActivity {
 		Resources ressources = getResources(); 
 		TabHost tabHost = getTabHost(); 
  
+		String userEmail = getIntent().getExtras().getString("userName");
+		
 		// search tab
 		Intent intentSearch = new Intent().setClass(this, SearchActivity.class);
+		intentSearch.putExtra("userName", userEmail);
 		TabSpec tabSpecSearch = tabHost
 		  .newTabSpec("Search")
 		  .setContent(intentSearch);
@@ -25,6 +28,7 @@ public class TabMainActivity extends TabActivity {
  
 		// Upload tab
 		Intent intentUpload = new Intent().setClass(this, UploadActivity.class);
+		intentUpload.putExtra("userName", userEmail);
 		TabSpec tabSpecUpload = tabHost
 		  .newTabSpec("Upload")
 		  .setContent(intentUpload);
@@ -33,6 +37,7 @@ public class TabMainActivity extends TabActivity {
  
 		// Profile tab
 		Intent intentProfile = new Intent().setClass(this, ProfileActivity.class);
+		intentProfile.putExtra("userName", userEmail);
 		TabSpec tabSpecProfile = tabHost
 		  .newTabSpec("Profile")
 		  .setContent(intentProfile);
