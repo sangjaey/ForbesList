@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -31,102 +33,145 @@ import java.io.UnsupportedEncodingException;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements CBHelperResponder {
-	Button joinButton,button1;
-	
+	Button joinButton, button1;
 	public static CBHelper myHelper;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        addListenerOnButton();
-        addListenerOnButton2();
-        JSONObject in = new JSONObject();;
-    	myHelper = new CBHelper(
-    	        "forbeslist",
-    	        "cac21deef7dd81d8af7506cd257173d2", 
-    	        this);
-    	myHelper.setPassword(md5("1234"));
-    	try {
-    		in.put("name", "sangwon"); 
-    		in.put("pw","123123");
-			 //in= new JSONObject().put("name", "sangwon");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		addListenerOnButton();
+		addListenerOnButton2();
+
+		
+		/*
+		JSONObject in = new JSONObject();
+		myHelper = new CBHelper("forbeslist",
+				"cac21deef7dd81d8af7506cd257173d2", this);
+		myHelper.setPassword(md5("1234"));
+		try {
+			in.put("name", "sangwon");
+			in.put("pw", "123123"); // in= new JSONObject().put("name",
+									// "sangwon");
+		} catch (JSONException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	myHelper.insertDocument(in, "test",this);
+		myHelper.insertDocument(in, "test", this);
+		CBSearchCondition cond = new CBSearchCondition("nameValuePairs.name",
+				CBSearchConditionOperator.CBOperatorEqual, "sangwon");
+		
+		myHelper.searchDocument("test", cond, this);
+		 */
+	}
 
-    	
-    	// search
-    	CBSearchCondition cond = new CBSearchCondition("nameValuePairs.name", CBSearchConditionOperator.CBOperatorEqual, "sangwon");
-        cond.setLimit(3);
-
-        myHelper.searchDocument("test",cond,this);
-    	
-    
-    }
-    private static String md5(String s) {
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i=0; i<messageDigest.length; i++)
-                    hexString.append(String.format("%02x", messageDigest[i]));
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }	
-    
-    public void addListenerOnButton() {
+	// move to register button
+	public void addListenerOnButton() {
 		final Context context = this;
 		joinButton = (Button) findViewById(R.id.register);
 		joinButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-					// go to next activity with 3 values passed
-					Intent intent = new Intent(context, JoinActivity.class);
-					startActivity(intent);
+				// go to next activity with 3 values passed
+				Intent intent = new Intent(context, JoinActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
-	
+
+	// try to log in
 	public void addListenerOnButton2() {
 		final Context context = this;
-		joinButton = (Button) findViewById(R.id.button1);
-		joinButton.setOnClickListener(new OnClickListener() {
+		myHelper = new CBHelper("forbeslist",
+				"cac21deef7dd81d8af7506cd257173d2", this);
+		myHelper.setPassword(md5("1234"));
+
+		myHelper = new CBHelper("forbeslist",
+				"cac21deef7dd81d8af7506cd257173d2", this);
+		myHelper.setPassword(md5("1234"));
+		User in = new User("a","b","c");
+		
+		myHelper.insertDocument(in, "test", this);
+		
+		
+		
+		
+		button1 = (Button) findViewById(R.id.button1);
+		button1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-					// go to next activity with 3 values passed
-					Intent intent = new Intent(context, TabMainActivity.class);
-					startActivity(intent);
+				// go to next activity with 3 values passed
+				// Intent intent = new Intent(context, TabMainActivity.class);
+				// startActivity(intent);
+				EditText emailText = (EditText) findViewById(R.id.email);
+				EditText passwordText = (EditText) findViewById(R.id.pw);
+
+				String email = emailText.getText().toString();
+				String password = passwordText.getText().toString();
+
+				System.out.println(email);
+				CBSearchCondition cond = new CBSearchCondition(
+						"email",
+						CBSearchConditionOperator.CBOperatorEqual, email);
+				cond.setLimit(3);
+				myHelper.searchDocument("test", cond, MainActivity.this);
+
 			}
 		});
 	}
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
 	@Override
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 
-		if(arg1.getData() instanceof List){
-			System.out.println("@@@@@@@@@@@@@@@@@@@"+ ((List)arg1.getData()).size());
-			System.out.println("*******************"+((List)arg1.getData()).get(0).toString());
-		}
-			else
-			System.out.println("###################"+arg1.getData());
-			
-			
+		if (arg1.getData() instanceof List) {
+			System.out.println("@@@@@@@@@@@@@@@@"
+					+ ((List) arg1.getData()).size());
+			if (((List) arg1.getData()).size() != 0) {
+				String s = (((List) arg1.getData()).get(0)).toString();
+				System.out.println(((List) arg1.getData()).get(0));
+				User newUser = (User)((List) arg1.getData()).get(0);
+						System.out.println(newUser.getEmail());
+	/*			JSONObject result;
+				try {
+					result = new JSONObject(s);
+					// http://stackoverflow.com/questions/7705081/jax-rs-resteasy-service-return-json-string-without-double-quote
+					System.out.println(result.get("password"));
+					System.out.println("valuepair : "
+							+ result.get("nameValuePairs.password"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+			}
+
+		} else
+			System.out.println("###################" + arg1.getData());
 	}
-    
+
+	private static String md5(String s) {
+		try {
+			// Create MD5 Hash
+			MessageDigest digest = java.security.MessageDigest
+					.getInstance("MD5");
+			digest.update(s.getBytes());
+			byte messageDigest[] = digest.digest();
+
+			// Create Hex String
+			StringBuffer hexString = new StringBuffer();
+			for (int i = 0; i < messageDigest.length; i++)
+				hexString.append(String.format("%02x", messageDigest[i]));
+			return hexString.toString();
+
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
 }
