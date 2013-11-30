@@ -1,7 +1,13 @@
 package project.forbeslist;
  
 
+import java.io.DataInputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -19,10 +25,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
- 
+import com.cloudbase.*;
+import java.lang.Object;
 public class UploadActivity extends Activity {
 	private static int TAKE_PICTURE = 1;
 	private Uri imageUri;
+	private File photo;
+	private CBHelperResponder r;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +48,25 @@ public class UploadActivity extends Activity {
                 String title = tText.getText().toString();
                 String author = aText.getText().toString();
                 nonNullFlag = !(title.equals("") || author.equals(""));
-
+                JSONObject in = null;
         	    if(nonNullFlag){
         	    	//put in database
+
         	    	//TODO
+        	    	try {
+			    		 in = new JSONObject();
+			    		 in.put("title", title);
+			    		 in.put("author", author);
+			    		 if (photo!=null){
+			    			 ArrayList<File> files = new ArrayList<File>();
+			        	     files.add(photo); 
+			        	     MainActivity.myHelper.insertDocument(in, "test", files, r);
+			    		 }
+			    		 else MainActivity.myHelper.insertDocument(in, "test");
+			    		 
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
         	    	
         	    	//toast to say upload done.
         	    	Context context = getApplicationContext();
@@ -67,11 +91,10 @@ public class UploadActivity extends Activity {
 			@Override
 			public void onClick(View v) {		
 				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-			    File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
+			    photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
 			    intent.putExtra(MediaStore.EXTRA_OUTPUT,
 			            Uri.fromFile(photo));
 			    imageUri = Uri.fromFile(photo);
-			    //attach File photo to db request and send to db.
 			    startActivityForResult(intent, TAKE_PICTURE);
 			}       	
         });
