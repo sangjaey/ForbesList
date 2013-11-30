@@ -83,8 +83,12 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 		
 		// TODO Auto-generated method stub
 		if(arg1==null){
+			System.out.println("NULL RETURNED");
 			validEmail = true;
 		}
+
+		if(!arg1.isSuccess())
+			System.out.println("NOt SUCCESSFULL");
 		
 		if (arg1.getData() instanceof List) {
 			List results = (List) arg1.getData();
@@ -102,5 +106,21 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 
 
 	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		validEmail = false;
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		validEmail = false;
+	}
+	
+	
 
 }
