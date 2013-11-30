@@ -125,7 +125,7 @@ public class MainActivity extends Activity implements CBHelperResponder {
 				String pass = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("password");
 				if(pw.equals(pass)){
 					Intent intent = new Intent(this, TabMainActivity.class);
-					intent.putExtra("userEmail", email);
+					intent.putExtra("userName", email);
 					startActivity(intent);
 				}
 				else{
