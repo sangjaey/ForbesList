@@ -1,11 +1,8 @@
 package project.forbeslist;
  
 
-import java.io.DataInputStream;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Vector;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,6 +11,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,21 +26,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.cloudbase.*;
-import java.lang.Object;
 public class UploadActivity extends Activity {
 	private static int TAKE_PICTURE = 1;
 	private Uri imageUri;
 	private File photo;
 	private CBHelperResponder r;
+	private LocationManager mlocManager;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
+        mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Button uploadBtn = (Button) findViewById(R.id.button_u);
         Button snapBtn = (Button) findViewById(R.id.button1);
         uploadBtn.setOnClickListener(new OnClickListener(){
         	@Override
 			public void onClick(View arg0) {
+        		MainActivity.myHelper.setUseLocation(true);
+				Location location = mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				if (location!=null) MainActivity.myHelper.setCurrentLocation(location);
+				Toast.makeText(getBaseContext(), "Current loc: lon: "+ location.getLongitude() + "lat: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
 				boolean nonNullFlag = false;
 				EditText tText = (EditText) findViewById(R.id.title_u);
 				EditText aText = (EditText) findViewById(R.id.author_u);
@@ -57,6 +62,7 @@ public class UploadActivity extends Activity {
 			    		 in = new JSONObject();
 			    		 in.put("title", title);
 			    		 in.put("author", author);
+			    		 in.put("location", location);
 			    		 if (photo!=null){
 			    			 ArrayList<File> files = new ArrayList<File>();
 			        	     files.add(photo); 
@@ -98,6 +104,47 @@ public class UploadActivity extends Activity {
 			    startActivityForResult(intent, TAKE_PICTURE);
 			}       	
         });
+        
+        LocationListener mlocListener = new LocationListener()
+		{
+			@Override
+			public void onLocationChanged(Location location)
+			{
+			//if (location != null)
+			//{
+				Toast.makeText(getBaseContext(),
+				"New location latitude [" +
+				location.getLatitude() +
+				"] longitude [" + 						location.getLongitude()+"]",
+				Toast.LENGTH_SHORT).show();
+			//}
+			}
+
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getBaseContext(),"No provider available",Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getBaseContext(),"Provider enabled!",Toast.LENGTH_SHORT).show();
+				
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getBaseContext(),"GPS status changed",Toast.LENGTH_SHORT).show();
+			}
+		};
+
+
+
+		mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 1, mlocListener);
         
         
     }

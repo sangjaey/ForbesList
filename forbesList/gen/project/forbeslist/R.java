@@ -197,19 +197,20 @@ public final class R {
         public static final int TextView08=0x7f090009;
         public static final int TextView09=0x7f09000a;
         public static final int TextView10=0x7f09000b;
-        public static final int action_settings=0x7f090029;
+        public static final int action_settings=0x7f09002a;
         public static final int author_s=0x7f090020;
-        public static final int author_u=0x7f090024;
+        public static final int author_u=0x7f090025;
+        public static final int bookList=0x7f090022;
         public static final int button1=0x7f090011;
         public static final int button_s=0x7f090017;
-        public static final int button_u=0x7f090026;
+        public static final int button_u=0x7f090027;
         public static final int editText1=0x7f09000d;
         public static final int editText2=0x7f09000e;
         public static final int editText3=0x7f09000f;
         public static final int editText4=0x7f090010;
         public static final int email=0x7f090012;
         public static final int email_p=0x7f09001d;
-        public static final int imageView=0x7f090028;
+        public static final int imageView=0x7f090029;
         public static final int imageView1=0x7f090001;
         public static final int image_p=0x7f09001b;
         public static final int listView1=0x7f090018;
@@ -225,10 +226,10 @@ public final class R {
         public static final int textView2=0x7f090014;
         public static final int textView3=0x7f090015;
         public static final int title_s=0x7f090021;
-        public static final int title_u=0x7f090025;
-        public static final int upload_author=0x7f090022;
-        public static final int upload_snapshot=0x7f090027;
-        public static final int upload_title=0x7f090023;
+        public static final int title_u=0x7f090026;
+        public static final int upload_author=0x7f090023;
+        public static final int upload_snapshot=0x7f090028;
+        public static final int upload_title=0x7f090024;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
