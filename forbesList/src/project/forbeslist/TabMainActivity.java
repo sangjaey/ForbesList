@@ -51,7 +51,7 @@ public class TabMainActivity extends TabActivity {
 		tabHost.addTab(tabSpecProfile);
  
 		//set Windows tab as default (zero based)
-		tabHost.setCurrentTab(1);
+		tabHost.setCurrentTab(0);
 	}
  
 }
