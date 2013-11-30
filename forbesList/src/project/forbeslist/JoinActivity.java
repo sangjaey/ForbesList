@@ -22,6 +22,11 @@ import com.cloudbase.datacommands.CBSearchConditionOperator;
 public class JoinActivity extends Activity implements CBHelperResponder{
 	Button button1;
 	private boolean validEmail;
+	String email;
+	String name;
+	String phonenumber;
+	String password;
+	final Context context = this;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,7 +36,6 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 	}
 
 	public void addListenerOnButton() {
-		final Context context = this;
 		button1 = (Button) findViewById(R.id.button1);
 		button1.setOnClickListener(new OnClickListener() {
 			@Override
@@ -42,31 +46,24 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 				EditText phoneText = (EditText)findViewById(R.id.editText3);
 				EditText passwordText = (EditText)findViewById(R.id.editText4);
 
-				String email = emailText.getText().toString();
-				String name = nameText.getText().toString();
-				String phonenumber = phoneText.getText().toString();
-				String password = passwordText.getText().toString();
+				email = emailText.getText().toString();
+				name = nameText.getText().toString();
+				phonenumber = phoneText.getText().toString();
+				password = passwordText.getText().toString();
+				
 				if(email.isEmpty()||
 						name.isEmpty()||
 						phonenumber.isEmpty()||
 						password.isEmpty()){
 					return;
 				}
+				
 				CBSearchCondition cond = new CBSearchCondition(
 						"email",
 						CBSearchConditionOperator.CBOperatorEqual, email);
 				MainActivity.myHelper.searchDocument("test", cond, JoinActivity.this);
 
-				if(!validEmail){
-					TextView error_text = (TextView)findViewById(R.id.register_error);
-					error_text.setText("Email Already In use");
-					return;
-				}
-				User newUser = new User(email, password, name,phonenumber);
-
-				MainActivity.myHelper.insertDocument(newUser, "test");
-				Intent intent = new Intent(context, TabMainActivity.class);
-				startActivity(intent);
+				
 			}
 		});
 	}
@@ -89,6 +86,7 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 
 		if(!arg1.isSuccess())
 			System.out.println("NOt SUCCESSFULL");
+
 		
 		if (arg1.getData() instanceof List) {
 			List results = (List) arg1.getData();
@@ -103,8 +101,16 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 		} else{
 			System.out.println("###################" + arg1.getData());			
 		}
-
-
+		
+		if(!validEmail){
+			TextView error_text = (TextView)findViewById(R.id.register_error);
+			error_text.setText("Email Already In use");
+			return;
+		}
+		User newUser = new User(email, password, name,phonenumber);
+		MainActivity.myHelper.insertDocument(newUser, "test");
+		Intent intent = new Intent(context, TabMainActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
