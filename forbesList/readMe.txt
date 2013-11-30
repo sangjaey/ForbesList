@@ -5,12 +5,13 @@ Completed:
 - screen (navigation) flow complete
 - connecting cloudbase.io(cloud db)
 - touch screen
+- insert book info to db
+- uploading with camera
+- location
 
 
 TO DO:
 - enable login authentication
-- insert book info to the db
 - swipe gesture for navigation
-- uploading with camera feature (autofocus)
-- Location 
 - microphone search
+- search activity using expandable list from layout (each item should expand to a detailed description of the book, location of post, and contact info).
