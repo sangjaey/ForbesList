@@ -102,6 +102,7 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 		User newUser = new User(email, password, name,phonenumber);
 		MainActivity.myHelper.insertDocument(newUser, "test");
 		Intent intent = new Intent(context, TabMainActivity.class);
+		intent.putExtra("userName", email);
 		startActivity(intent);
 	}
 
