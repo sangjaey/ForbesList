@@ -1,6 +1,5 @@
 package project.forbeslist;
  
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,18 +8,18 @@ import com.cloudbase.CBHelperResponse;
 import com.cloudbase.CBQueuedRequest;
 import com.cloudbase.datacommands.CBSearchCondition;
 import com.cloudbase.datacommands.CBSearchConditionOperator;
+import com.google.gson.internal.StringMap;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
+
 import android.widget.Toast;
  
 public class SearchActivity extends Activity implements CBHelperResponder {
@@ -72,22 +71,50 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 		
 		// TODO Auto-generated method stub
-		
+		Double loc_lat=0.0;
+		Double loc_lon=0.0;
 		if (arg1.getData() instanceof List) {
 			
-			List results = (List) arg1.getData();
+			List<?> results = (List<?>) arg1.getData();
+			
 			for(int i=0;i<results.size();i++){
-				String title = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("title");
-				String author = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("author");
-				Double loc_lat = (Double) ((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("cb_location.lat");
-				Double loc_lon = (Double) ((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("cb_location.lng");
+				String title = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("title");
+				String author = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("author");
+				
+				if(((StringMap<?>)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_location"))==null);
+				
+				else{
+					loc_lat = (Double) ((StringMap<?>)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_location")).get("lat");
+					loc_lon = (Double) ((StringMap<?>)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_location")).get("lng");
+				}
+				ArrayList<?> a = (ArrayList<?>) (((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_files"));
+				if(a==null){
+					;
+				}
+				else{
+					System.out.println((a.get(0)).toString().substring(8,41));
+					String file_id=(a.get(0)).toString().substring(8,41);
+					if (file_id!=null)MainActivity.myHelper.downloadFile(file_id, SearchActivity.this);
+					System.out.println("file downloaded for parent " + i);
+					if (arg1.getDownloadedFile() != null){
+						System.out.println("something is downloded");
+						Uri imageUri = Uri.fromFile(arg1.getDownloadedFile());
+						String strUri = "###" + imageUri.toString();
+						arrayChildren.add(strUri);
+						System.out.println("Arraychild added to parent "+ i);
+					}
+				}
+				
+				
 				//TODO: fetch image info here if you can
 				Parent parent = new Parent();
 				parent.setTitle(title + ", by "+ author);
 				arrayChildren = new ArrayList<String>();
 				arrayChildren.add("Title: " + title);
 				arrayChildren.add("Author: " + author);
-				arrayChildren.add("Location: " + loc_lat + "," + loc_lon);
+				if(loc_lat==0.0 && loc_lon==0.0) arrayChildren.add("Location: Not Specified");
+				else arrayChildren.add("Location: " + loc_lat + "," + loc_lon);
+				
 				parent.setArrayChildren(arrayChildren);
 				arrayParents.add(parent);
 

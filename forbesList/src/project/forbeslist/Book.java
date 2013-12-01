@@ -8,7 +8,6 @@ public class Book {
 	Location loc;
 	String uploader;
 	
-	
 	public Book(String title, String author, Location loc){
 		this.title=title;
 		this.author=author;

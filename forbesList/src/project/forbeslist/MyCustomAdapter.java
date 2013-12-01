@@ -1,13 +1,19 @@
 package project.forbeslist;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
  
 import java.util.ArrayList;
 
@@ -16,10 +22,11 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
  
     private LayoutInflater inflater;
     private ArrayList<Parent> mParent;
- 
+    private Context context;
     public MyCustomAdapter(Context context, ArrayList<Parent> parent){
         mParent = parent;
         inflater = LayoutInflater.from(context);
+        this.context=context;
     }
  
  
@@ -72,7 +79,7 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
         if (view == null) {
             view = inflater.inflate(R.layout.list_item_parent, viewGroup,false);
         }
- 
+        
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         //"i" is the position of the parent/group in the list
         textView.setText(getGroup(i).toString());
@@ -97,10 +104,30 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
         }
  
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
+        ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image_child);
         //"i" is the position of the parent/group in the list and 
         //"i1" is the position of the child
-        textView.setText(mParent.get(i).getArrayChildren().get(i1));
- 
+        String txt = mParent.get(i).getArrayChildren().get(i1);
+        if (txt.startsWith("###")) {
+        	System.out.println("detected dl");
+        	txt = txt.substring(3);
+        	System.out.println("Parsed file id: " + txt);
+        	Uri selectedImage = Uri.parse(txt);
+            context.getContentResolver().notifyChange(selectedImage, null);
+            ContentResolver cr = context.getContentResolver();
+            Bitmap bitmap;
+            try {
+                 bitmap = android.provider.MediaStore.Images.Media
+                 .getBitmap(cr, selectedImage);
+                imageView.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                Log.e("Camera", e.toString());
+            }
+        }
+        else textView.setText(txt);
+        
+        //DRAW SHIT
+        //imageView.setImageResource()
         view.setTag(holder);
  
         //return the entire view

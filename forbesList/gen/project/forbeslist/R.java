@@ -197,7 +197,7 @@ public final class R {
         public static final int TextView08=0x7f090009;
         public static final int TextView09=0x7f09000a;
         public static final int TextView10=0x7f09000b;
-        public static final int action_settings=0x7f090030;
+        public static final int action_settings=0x7f090031;
         public static final int author_s=0x7f090021;
         public static final int author_u=0x7f090026;
         public static final int bookList=0x7f090023;
@@ -213,12 +213,13 @@ public final class R {
         public static final int imageView=0x7f09002a;
         public static final int imageView1=0x7f090001;
         public static final int listView1=0x7f090019;
-        public static final int list_item=0x7f09002d;
+        public static final int list_item=0x7f09002e;
         public static final int list_item_child=0x7f09002b;
+        public static final int list_item_image_child=0x7f09002d;
         public static final int list_item_text_child=0x7f09002c;
-        public static final int list_item_text_view=0x7f09002e;
+        public static final int list_item_text_view=0x7f09002f;
         public static final int name_p=0x7f09001c;
-        public static final int parentButton=0x7f09002f;
+        public static final int parentButton=0x7f090030;
         public static final int phone_p=0x7f09001b;
         public static final int profile_email=0x7f09001a;
         public static final int profile_phone=0x7f09001d;

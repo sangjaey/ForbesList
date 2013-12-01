@@ -68,6 +68,7 @@ public class UploadActivity extends Activity {
 
 					 in = new Book(title, author, location);
 					 in.setUploader(uploader);
+					 
 					 if (photo!=null){
 						 ArrayList<File> files = new ArrayList<File>();
 					     files.add(photo); 
