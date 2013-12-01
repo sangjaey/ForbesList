@@ -1,17 +1,17 @@
 package project.forbeslist;
 
-import java.io.File;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 
 public class Book {
 	String title;
 	String author;
 	Location loc;
-	File photo;
+	Bitmap photo;
 	
 	
-	public Book(String title, String author, Location loc, File photo){
+	public Book(String title, String author, Location loc, Bitmap photo){
 		this.title=title;
 		this.author=author;
 		this.loc =loc;
@@ -48,11 +48,11 @@ public class Book {
 	public void setLoc(Location loc) {
 		this.loc = loc;
 	}
-	public File getPhoto(){
+	public Bitmap getPhoto(){
 		return photo;
 	}
 	
-	public void setPhoto(File photo){
+	public void setPhoto(Bitmap photo){
 		this.photo = photo;
 	}
 	

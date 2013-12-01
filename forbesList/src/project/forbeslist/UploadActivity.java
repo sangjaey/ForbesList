@@ -57,6 +57,7 @@ public class UploadActivity extends Activity {
                 String author = aText.getText().toString();
                 nonNullFlag = !(title.equals("") || author.equals(""));
                 Book in = null;
+   	    	 	Bitmap bitmap = null;
         	    if(nonNullFlag){
         	    	//put in database
 
@@ -64,7 +65,14 @@ public class UploadActivity extends Activity {
 					 in.put("title", title);
 					 in.put("author", author);
 					 in.put("location", location);*/
-					 in = new Book(title, author, location, photo);
+
+        	    	 try {
+                         bitmap = android.provider.MediaStore.Images.Media
+                         .getBitmap(getContentResolver(), imageUri);
+                        
+                    } catch (Exception e) {
+                    }
+					 in = new Book(title, author, location, bitmap);
 					 if (photo!=null){
 						 ArrayList<File> files = new ArrayList<File>();
 					     files.add(photo); 
