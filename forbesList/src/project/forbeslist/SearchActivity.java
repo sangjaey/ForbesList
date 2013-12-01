@@ -26,11 +26,14 @@ import android.widget.Toast;
 public class SearchActivity extends Activity implements CBHelperResponder {
 	
 	private ExpandableListView mExpandableList;
+	private ArrayList<Parent> arrayParents;
+	private ArrayList<String> arrayChildren;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Button searchBtn = (Button) findViewById(R.id.button_s);
+	    mExpandableList = (ExpandableListView)findViewById(R.id.bookList);			 
         searchBtn.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -43,6 +46,9 @@ public class SearchActivity extends Activity implements CBHelperResponder {
                 String author = aText.getText().toString();
                 nonNullFlag = !(title.equals("") || author.equals(""));
         	    if(nonNullFlag){
+        	    	
+        	        arrayParents = new ArrayList<Parent>();
+        	        arrayChildren = new ArrayList<String>();
         	    	//search from db. search by title/search by author
         	    	CBSearchCondition cond = new CBSearchCondition(
     						"title",
@@ -68,9 +74,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 		// TODO Auto-generated method stub
 		
 		if (arg1.getData() instanceof List) {
-			mExpandableList = (ExpandableListView)findViewById(R.id.bookList);			 
-	        ArrayList<Parent> arrayParents = new ArrayList<Parent>();
-	        ArrayList<String> arrayChildren = new ArrayList<String>();
+			
 			List results = (List) arg1.getData();
 			for(int i=0;i<results.size();i++){
 				String title = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("title");
