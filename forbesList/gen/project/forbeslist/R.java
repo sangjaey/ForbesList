@@ -197,10 +197,11 @@ public final class R {
         public static final int TextView08=0x7f090009;
         public static final int TextView09=0x7f09000a;
         public static final int TextView10=0x7f09000b;
-        public static final int action_settings=0x7f09002b;
+        public static final int action_settings=0x7f090030;
         public static final int author_s=0x7f090021;
         public static final int author_u=0x7f090026;
         public static final int bookList=0x7f090023;
+        public static final int button=0x7f09002f;
         public static final int button1=0x7f090011;
         public static final int button_s=0x7f090018;
         public static final int button_u=0x7f090028;
@@ -213,6 +214,10 @@ public final class R {
         public static final int imageView=0x7f09002a;
         public static final int imageView1=0x7f090001;
         public static final int listView1=0x7f090019;
+        public static final int list_item=0x7f09002d;
+        public static final int list_item_child=0x7f09002b;
+        public static final int list_item_text_child=0x7f09002c;
+        public static final int list_item_text_view=0x7f09002e;
         public static final int name_p=0x7f09001c;
         public static final int phone_p=0x7f09001b;
         public static final int profile_email=0x7f09001a;
@@ -241,6 +246,8 @@ public final class R {
         public static final int activity_search=0x7f030005;
         public static final int activity_tab_main=0x7f030006;
         public static final int activity_upload=0x7f030007;
+        public static final int list_item_child=0x7f030008;
+        public static final int list_item_parent=0x7f030009;
     }
     public static final class menu {
         public static final int detail=0x7f080000;

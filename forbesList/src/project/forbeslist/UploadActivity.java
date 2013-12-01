@@ -68,9 +68,9 @@ public class UploadActivity extends Activity {
 					 if (photo!=null){
 						 ArrayList<File> files = new ArrayList<File>();
 					     files.add(photo); 
-					     MainActivity.myHelper.insertDocument(in, "Books", files, r);
+					     MainActivity.myHelper.insertDocument(in, "book", files, r);
 					 }
-					 else MainActivity.myHelper.insertDocument(in, "Books");
+					 else MainActivity.myHelper.insertDocument(in, "book");
         	    	
         	    	//toast to say upload done.
         	    	Context context = getApplicationContext();
