@@ -23,9 +23,8 @@ import android.widget.Toast;
  
 public class SearchActivity extends Activity implements CBHelperResponder {
 	
+	private ArrayList<Parent> arrayParents =new ArrayList<Parent>();;
 	private ExpandableListView mExpandableList;
-	private ArrayList<Parent> arrayParents;
-	private ArrayList<String> arrayChildren;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +34,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
         searchBtn.setOnClickListener(new OnClickListener(){
 
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
+			public void onClick(View v) {				// TODO Auto-generated method stub
 				boolean nonNullFlag = false;
 				EditText tText = (EditText) findViewById(R.id.title_s);
 				EditText aText = (EditText) findViewById(R.id.author_s);
@@ -44,9 +42,6 @@ public class SearchActivity extends Activity implements CBHelperResponder {
                 String author = aText.getText().toString();
                 nonNullFlag = !(title.equals("") || author.equals(""));
         	    if(nonNullFlag){
-        	    	
-        	        arrayParents = new ArrayList<Parent>();
-        	        arrayChildren = new ArrayList<String>();
         	    	//search from db. search by title/search by author
         	    	CBSearchCondition cond = new CBSearchCondition(
     						"title",
@@ -70,13 +65,26 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 		
 		if (arg1.getFunction().equals("download")) {
-			System.out.println("You want dl?");
+			System.out.println("DL handler starting");
 			 if (arg1.getDownloadedFile() != null) {
 				 System.out.println("DL complete");
 				 Uri imageUri = Uri.fromFile(arg1.getDownloadedFile());
 					String strUri = "###" + imageUri.toString();
-					arrayChildren.add(strUri);
-                 
+					for (int i=0; i<arrayParents.size(); i++){
+						Parent p = arrayParents.get(i);
+						ArrayList<String> c = p.getArrayChildren();
+						
+						//if file id equals strUri parsed..
+						String fileid = c.get(0);
+						System.out.println("fileid: "+fileid);
+						System.out.println("uri: " +strUri.substring(46,78));
+						if (fileid!=null && fileid.equals(strUri.substring(46,78))){
+							System.out.println("DL received for imaging");
+							c.add(strUri);
+							p.setArrayChildren(c);
+							arrayParents.set(i,p);
+						}
+					}
          }
 		}
 		
@@ -88,7 +96,10 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 			Double loc_lon=0.0;
 			List<?> results = (List<?>) arg1.getData();
 			
+			ArrayList<String> arrayChildren;
 			for(int i=0;i<results.size();i++){
+				System.out.println("LOOP START");
+				arrayChildren = new ArrayList<String>();
 				String title = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("title");
 				String author = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("author");
 				
@@ -106,6 +117,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				
 				
 				//TODO: fetch image info here if you can
+				
 				Parent parent = new Parent();
 				parent.setTitle(title + ", by "+ author);
 				arrayChildren = new ArrayList<String>();
@@ -115,13 +127,15 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				else arrayChildren.add("Location: " + loc_lat + "," + loc_lon);
 				
 				if(a==null){
-					;
+					arrayChildren.add(0, "No snapshot");
 				}
 				else{
 					String file_id=(a.get(0)).toString().substring(9,41);
+					arrayChildren.add(0,file_id);
 					if (file_id!=null){
 						System.out.println("fileid: " + file_id);
 						MainActivity.myHelper.downloadFile(file_id, SearchActivity.this);
+						System.out.println("DL command issued");
 					}
 				}
 				
@@ -129,13 +143,19 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				parent.setArrayChildren(arrayChildren);
 				arrayParents.add(parent);
 				arrayChildren = new ArrayList<String>();
+				System.out.println("LOOP END");
+
 			}
 			//sets the adapter that provides data to the list.
+			System.out.println("Adapter Set");
 	        mExpandableList.setAdapter(new MyCustomAdapter(SearchActivity.this,arrayParents));
-			
-		} else{
+		} 
+		
+		
+		else{
 			System.out.println("###################" + arg1.getData());			
 		}
+		
 
 	}
     

@@ -13,7 +13,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
  
 import java.util.ArrayList;
 
@@ -74,7 +73,7 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
  
         ViewHolder holder = new ViewHolder();
-        //holder.groupPosition = groupPosition; 
+        holder.groupPosition = i; 
  
         if (view == null) {
             view = inflater.inflate(R.layout.list_item_parent, viewGroup,false);
@@ -94,10 +93,9 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
     @Override
     //in this method you must set the text to see the children on the list
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
- 
         ViewHolder holder = new ViewHolder();
-        //holder.childPosition = childPosition;
-        //holder.groupPosition = groupPosition;
+        holder.childPosition = i1;
+        holder.groupPosition = i;
  
         if (view == null) {
             view = inflater.inflate(R.layout.list_item_child, viewGroup,false);
@@ -108,6 +106,10 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
         //"i" is the position of the parent/group in the list and 
         //"i1" is the position of the child
         String txt = mParent.get(i).getArrayChildren().get(i1);
+        if (txt==null){
+        	view.setTag(holder);
+        	return view;
+        }
         if (txt.startsWith("###")) {
         	System.out.println("detected dl");
         	txt = txt.substring(3);
@@ -120,6 +122,7 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
                  bitmap = android.provider.MediaStore.Images.Media
                  .getBitmap(cr, selectedImage);
                 imageView.setImageBitmap(bitmap);
+                textView.setText("Image: ");
             } catch (Exception e) {
                 Log.e("Camera", e.toString());
             }
