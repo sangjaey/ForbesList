@@ -79,15 +79,28 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 			for(int i=0;i<results.size();i++){
 				String title = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("title");
 				String author = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("author");
-				File photo = (File)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("photo");
-				Location loc = (Location)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("loc");
-				//if photo is not null, show each book obj on expandable list
+				Double loc_lat = (Double) ((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("cb_location.lat");
+				Double loc_lon = (Double) ((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("cb_location.lng");
+				//TODO: fetch image info here if you can
 				Parent parent = new Parent();
 				parent.setTitle(title + ", by "+ author);
 				arrayChildren = new ArrayList<String>();
-				arrayChildren.add(title + ", by "+ author);
+				arrayChildren.add("Title: " + title);
+				arrayChildren.add("Author: " + author);
+				arrayChildren.add("Location: " + loc_lat + "," + loc_lon);
 				parent.setArrayChildren(arrayChildren);
 				arrayParents.add(parent);
+				Button btn = (Button)findViewById(R.id.parentButton);
+				
+				btn.setOnClickListener(new OnClickListener(){
+
+					@Override
+					public void onClick(View arg0) {
+						//TODO : if pressed display available picture. new activity with layout with imageview.
+					}
+					
+				});
+				
 			}
 			//sets the adapter that provides data to the list.
 	        mExpandableList.setAdapter(new MyCustomAdapter(SearchActivity.this,arrayParents));

@@ -29,8 +29,9 @@ public class UploadActivity extends Activity {
 	private File photo;
 	private CBHelperResponder r;
 	private LocationManager mlocManager;
-	
+	private String uploader;
     public void onCreate(Bundle savedInstanceState) {
+        uploader = getIntent().getExtras().getString("userName");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
         mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -57,7 +58,6 @@ public class UploadActivity extends Activity {
                 String author = aText.getText().toString();
                 nonNullFlag = !(title.equals("") || author.equals(""));
                 Book in = null;
-   	    	 	Bitmap bitmap = null;
         	    if(nonNullFlag){
         	    	//put in database
 
@@ -66,13 +66,8 @@ public class UploadActivity extends Activity {
 					 in.put("author", author);
 					 in.put("location", location);*/
 
-        	    	 try {
-                         bitmap = android.provider.MediaStore.Images.Media
-                         .getBitmap(getContentResolver(), imageUri);
-                        
-                    } catch (Exception e) {
-                    }
-					 in = new Book(title, author, location, bitmap);
+					 in = new Book(title, author, location);
+					 in.setUploader(uploader);
 					 if (photo!=null){
 						 ArrayList<File> files = new ArrayList<File>();
 					     files.add(photo); 

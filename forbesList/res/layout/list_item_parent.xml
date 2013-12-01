@@ -22,6 +22,6 @@ android:text="button"
 android:focusable="false"
 android:layout_gravity="right"
 android:focusableInTouchMode="false"
-android:id="@+id/button"/>
+android:id="@+id/parentButton"/>
  
 </LinearLayout>
