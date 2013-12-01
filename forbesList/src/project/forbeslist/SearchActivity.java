@@ -90,17 +90,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				arrayChildren.add("Location: " + loc_lat + "," + loc_lon);
 				parent.setArrayChildren(arrayChildren);
 				arrayParents.add(parent);
-				Button btn = (Button)findViewById(R.id.parentButton);
-				
-				btn.setOnClickListener(new OnClickListener(){
 
-					@Override
-					public void onClick(View arg0) {
-						//TODO : if pressed display available picture. new activity with layout with imageview.
-					}
-					
-				});
-				
 			}
 			//sets the adapter that provides data to the list.
 	        mExpandableList.setAdapter(new MyCustomAdapter(SearchActivity.this,arrayParents));
