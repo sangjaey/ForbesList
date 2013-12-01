@@ -10,15 +10,21 @@ import com.cloudbase.datacommands.CBSearchCondition;
 import com.cloudbase.datacommands.CBSearchConditionOperator;
 import com.google.gson.internal.StringMap;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 
 import android.widget.Toast;
  
@@ -70,11 +76,65 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 	@Override
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 		
+		if (arg1.getFunction().equals("download")) {
+			System.out.println("You want dl?");
+			 if (arg1.getDownloadedFile() != null) {
+				 System.out.println("DL complete");
+				 Uri imageUri = Uri.fromFile(arg1.getDownloadedFile());
+					String strUri = "###" + imageUri.toString();
+					arrayChildren.add(strUri);
+                 /*try {
+                         // resize the downloaded image and display it in an ImageView
+                         BitmapFactory.Options options = new BitmapFactory.Options();
+                         options.inJustDecodeBounds = true;
+                         BitmapFactory.decodeFile(arg1.getDownloadedFile().getAbsolutePath(), options);
+                         int imageHeight = options.outHeight;
+                         int imageWidth = options.outWidth;
+                         
+                         int reqWidth = 200;
+                         int reqHeight = 200;
+                         int inSampleSize = 1;
+
+                         if (imageHeight > reqHeight || imageWidth > reqWidth) {
+                                 if (imageWidth > imageHeight) {
+                                         inSampleSize = Math.round((float)imageHeight / (float)reqHeight);
+                                 } else {
+                                         inSampleSize = Math.round((float)imageWidth / (float)reqWidth);
+                                 }
+                         }
+                         options.inSampleSize = inSampleSize;
+                         
+                         options.inJustDecodeBounds = false;
+                         Bitmap myBitmap = BitmapFactory.decodeFile(arg1.getDownloadedFile().getAbsolutePath(), options); //BitmapFactory.decodeStream(new FileInputStream(res.getDownloadedFile()), options);
+                         
+                         ImageView imageView = new ImageView(this);
+                 imageView.setImageBitmap(myBitmap);
+                         
+                         imageView.setOnClickListener(new OnClickListener() {
+                                 @Override
+                     public void onClick(View v) {
+                                         ((ViewGroup)v.getParent()).removeView(v);
+                     }
+                         });
+                 //setting image position
+                         LayoutParams par = new LayoutParams(
+                                         LayoutParams.MATCH_PARENT,
+                                         LayoutParams.WRAP_CONTENT);
+                 imageView.setLayoutParams(par);
+                         this.addContentView(imageView, par);
+                 
+                 } catch (Exception ex) {
+                         Log.e("DEMOAPP", "Error while opening downloaded file", ex);
+                 }*/
+         }
+		}
+		
+		
 		// TODO Auto-generated method stub
-		Double loc_lat=0.0;
-		Double loc_lon=0.0;
-		if (arg1.getData() instanceof List) {
-			
+		
+		else if (arg1.getData() instanceof List) {
+			Double loc_lat=0.0;
+			Double loc_lon=0.0;
 			List<?> results = (List<?>) arg1.getData();
 			
 			for(int i=0;i<results.size();i++){
@@ -88,22 +148,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 					loc_lon = (Double) ((StringMap<?>)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_location")).get("lng");
 				}
 				ArrayList<?> a = (ArrayList<?>) (((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_files"));
-				if(a==null){
-					;
-				}
-				else{
-					System.out.println((a.get(0)).toString().substring(8,41));
-					String file_id=(a.get(0)).toString().substring(8,41);
-					if (file_id!=null)MainActivity.myHelper.downloadFile(file_id, SearchActivity.this);
-					System.out.println("file downloaded for parent " + i);
-					if (arg1.getDownloadedFile() != null){
-						System.out.println("something is downloded");
-						Uri imageUri = Uri.fromFile(arg1.getDownloadedFile());
-						String strUri = "###" + imageUri.toString();
-						arrayChildren.add(strUri);
-						System.out.println("Arraychild added to parent "+ i);
-					}
-				}
+
 				
 				
 				//TODO: fetch image info here if you can
@@ -114,6 +159,25 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				arrayChildren.add("Author: " + author);
 				if(loc_lat==0.0 && loc_lon==0.0) arrayChildren.add("Location: Not Specified");
 				else arrayChildren.add("Location: " + loc_lat + "," + loc_lon);
+				
+				if(a==null){
+					;
+				}
+				else{
+					String file_id=(a.get(0)).toString().substring(9,41);
+					if (file_id!=null){
+						System.out.println("fileid: " + file_id);
+						MainActivity.myHelper.downloadFile(file_id, SearchActivity.this);
+					}
+					if (arg1.getDownloadedFile() != null){
+						System.out.println("something is downloded");
+						Uri imageUri = Uri.fromFile(arg1.getDownloadedFile());
+						String strUri = "###" + imageUri.toString();
+						arrayChildren.add(strUri);
+						System.out.println("Arraychild added to parent "+ i);
+					}
+				}
+				
 				
 				parent.setArrayChildren(arrayChildren);
 				arrayParents.add(parent);
