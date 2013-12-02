@@ -25,14 +25,13 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 	
 	private ArrayList<Parent> arrayParents =new ArrayList<Parent>();;
 	private ExpandableListView mExpandableList;
-	
+	private MyCustomAdapter a;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Button searchBtn = (Button) findViewById(R.id.button_s);
 	    mExpandableList = (ExpandableListView)findViewById(R.id.bookList);			 
         searchBtn.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View v) {				// TODO Auto-generated method stub
 				boolean nonNullFlag = false;
@@ -80,9 +79,11 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 						System.out.println("uri: " +strUri.substring(46,78));
 						if (fileid!=null && fileid.equals(strUri.substring(46,78))){
 							System.out.println("DL received for imaging");
-							c.add(strUri);
+							if (c.size()<5) c.add(strUri);
+							else c.add(4,strUri);
 							p.setArrayChildren(c);
 							arrayParents.set(i,p);
+							a.notifyDataSetChanged();
 						}
 					}
          }
@@ -121,13 +122,20 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				Parent parent = new Parent();
 				parent.setTitle(title + ", by "+ author);
 				arrayChildren = new ArrayList<String>();
-				arrayChildren.add("Title: " + title);
-				arrayChildren.add("Author: " + author);
-				if(loc_lat==0.0 && loc_lon==0.0) arrayChildren.add("Location: Not Specified");
-				else arrayChildren.add("Location: " + loc_lat + "," + loc_lon);
+				String msg;
+				if(loc_lat==0.0 && loc_lon==0.0) msg = "Location: Not Specified";
+				else msg = "Location: "  + loc_lat + "," + loc_lon;
+			
+				if (arrayChildren.size()<2) arrayChildren.add("Title: " + title);
+				else arrayChildren.add(1,"Title: " + title);
+				if (arrayChildren.size()<3) arrayChildren.add("Author: " + author);
+				else arrayChildren.add(2,"Author: " + author);
+				if (arrayChildren.size()<4) arrayChildren.add(msg);
+				else arrayChildren.add(3,msg);
 				
 				if(a==null){
 					arrayChildren.add(0, "No snapshot");
+					arrayChildren.add("No image available");
 				}
 				else{
 					String file_id=(a.get(0)).toString().substring(9,41);
@@ -148,7 +156,8 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 			}
 			//sets the adapter that provides data to the list.
 			System.out.println("Adapter Set");
-	        mExpandableList.setAdapter(new MyCustomAdapter(SearchActivity.this,arrayParents));
+        	a=new MyCustomAdapter(SearchActivity.this,arrayParents);
+	        mExpandableList.setAdapter(a);
 		} 
 		
 		

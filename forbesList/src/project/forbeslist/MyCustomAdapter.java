@@ -38,7 +38,8 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
     @Override
     //counts the number of children items so the list knows how many times calls getChildView() method
     public int getChildrenCount(int i) {
-        return mParent.get(i).getArrayChildren().size();
+        //return mParent.get(i).getArrayChildren().size();
+    	return 5;
     }
  
     @Override
@@ -94,12 +95,14 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
     //in this method you must set the text to see the children on the list
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         ViewHolder holder = new ViewHolder();
-        holder.childPosition = i1;
-        holder.groupPosition = i;
+        //holder.childPosition = i1;
+        //holder.groupPosition = i;
  
         if (view == null) {
+        	holder = new ViewHolder();
             view = inflater.inflate(R.layout.list_item_child, viewGroup,false);
         }
+        //else holder = (ViewHolder) view.getTag();
  
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
         ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image_child);
@@ -127,7 +130,11 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
                 Log.e("Camera", e.toString());
             }
         }
-        else textView.setText(txt);
+        else {
+        	view = inflater.inflate(R.layout.list_item_child, viewGroup,false);
+        	TextView textView2 = (TextView) view.findViewById(R.id.list_item_text_child);
+        	textView2.setText(txt);
+        }
         
         //DRAW SHIT
         //imageView.setImageResource()
