@@ -23,9 +23,9 @@ import android.widget.Toast;
  
 public class SearchActivity extends Activity implements CBHelperResponder {
 	
-	private ArrayList<Parent> arrayParents =new ArrayList<Parent>();;
+	private ArrayList<Parent> arrayParents =new ArrayList<Parent>();
 	private ExpandableListView mExpandableList;
-	private MyCustomAdapter a;
+	private MyCustomAdapter adap;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
@@ -35,6 +35,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 			@Override
 			public void onClick(View v) {				// TODO Auto-generated method stub
 				boolean nonNullFlag = false;
+				arrayParents =new ArrayList<Parent>();
 				EditText tText = (EditText) findViewById(R.id.title_s);
 				EditText aText = (EditText) findViewById(R.id.author_s);
 				String title = tText.getText().toString();
@@ -83,7 +84,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 							else c.add(4,strUri);
 							p.setArrayChildren(c);
 							arrayParents.set(i,p);
-							a.notifyDataSetChanged();
+							adap.notifyDataSetChanged();
 						}
 					}
          }
@@ -156,8 +157,9 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 			}
 			//sets the adapter that provides data to the list.
 			System.out.println("Adapter Set");
-        	a=new MyCustomAdapter(SearchActivity.this,arrayParents);
-	        mExpandableList.setAdapter(a);
+        	adap=new MyCustomAdapter(SearchActivity.this,arrayParents);
+        	adap.notifyDataSetChanged();
+	        mExpandableList.setAdapter(adap);
 		} 
 		
 		
