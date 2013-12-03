@@ -2,15 +2,22 @@ package project.forbeslist;
  
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -99,10 +106,12 @@ public class UploadActivity extends Activity {
 			@Override
 			public void onClick(View v) {		
 				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+				intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 			    photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
 			    intent.putExtra(MediaStore.EXTRA_OUTPUT,
 			            Uri.fromFile(photo));
 			    imageUri = Uri.fromFile(photo);
+			    
 			    startActivityForResult(intent, TAKE_PICTURE);
 			}       	
         });
@@ -150,7 +159,37 @@ public class UploadActivity extends Activity {
         
         
     }
-    
+    private Bitmap checkifImageRotated() {
+        ExifInterface exif;
+        try {
+            exif = new ExifInterface(Environment.getExternalStorageDirectory()+"/Pic.jpg");
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            int rotate = 0;
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270 :
+                    rotate = -90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180 :
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90 :
+                    rotate = 90;
+                    break;
+            }
+            if (rotate != 0) {
+                Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/Pic.jpg");
+                Matrix matrix = new Matrix();
+                matrix.setRotate(rotate);
+                Bitmap bmpRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
+                return bmpRotated;
+            }
+        }
+        catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -163,9 +202,10 @@ public class UploadActivity extends Activity {
                 ContentResolver cr = getContentResolver();
                 Bitmap bitmap;
                 try {
-                     bitmap = android.provider.MediaStore.Images.Media
-                     .getBitmap(cr, selectedImage);
-
+                     //bitmap = android.provider.MediaStore.Images.Media
+                     //.getBitmap(cr, selectedImage);
+                     bitmap = checkifImageRotated();
+                     bitmap.compress(CompressFormat.JPEG, 100, new FileOutputStream(Environment.getExternalStorageDirectory()+"/Pic.jpg"));
                     imageView.setImageBitmap(bitmap);
                     Toast.makeText(this, selectedImage.toString(),
                             Toast.LENGTH_LONG).show();
