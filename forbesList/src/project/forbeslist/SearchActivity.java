@@ -82,8 +82,8 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 						System.out.println("uri: " +strUri.substring(46,78));
 						if (fileid!=null && fileid.equals(strUri.substring(46,78))){
 							System.out.println("DL received for imaging");
-							if (c.size()<5) c.add(strUri);
-							else c.add(4,strUri);
+							if (c.size()<7) c.add(strUri);
+							else c.add(6,strUri);
 							p.setArrayChildren(c);
 							arrayParents.set(i,p);
 							adap.notifyDataSetChanged();
