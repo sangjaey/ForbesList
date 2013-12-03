@@ -39,7 +39,7 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
     //counts the number of children items so the list knows how many times calls getChildView() method
     public int getChildrenCount(int i) {
         //return mParent.get(i).getArrayChildren().size();
-    	return 5;
+    	return 7;
     }
  
     @Override

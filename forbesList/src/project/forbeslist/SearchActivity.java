@@ -26,9 +26,11 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 	private ArrayList<Parent> arrayParents =new ArrayList<Parent>();
 	private ExpandableListView mExpandableList;
 	private MyCustomAdapter adap;
+	String userEmail;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+		userEmail = getIntent().getExtras().getString("userName");
         Button searchBtn = (Button) findViewById(R.id.button_s);
 	    mExpandableList = (ExpandableListView)findViewById(R.id.bookList);			 
         searchBtn.setOnClickListener(new OnClickListener(){
@@ -104,6 +106,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				arrayChildren = new ArrayList<String>();
 				String title = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("title");
 				String author = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("author");
+				String price = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("price");
 				
 				if(((StringMap<?>)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_location"))==null){
 					loc_lat=0.0;
@@ -133,6 +136,11 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				else arrayChildren.add(2,"Author: " + author);
 				if (arrayChildren.size()<4) arrayChildren.add(msg);
 				else arrayChildren.add(3,msg);
+				if (arrayChildren.size()<5) arrayChildren.add("Seller Email: "+userEmail);
+				else arrayChildren.add(4,"Seller Email: "+userEmail);
+				if (arrayChildren.size()<6) arrayChildren.add("Book Price: "+price);
+				else arrayChildren.add(5,"Book Price: "+price);
+				
 				
 				if(a==null){
 					arrayChildren.add(0, "No snapshot");
