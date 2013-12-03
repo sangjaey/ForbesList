@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cloudbase.CBHelperResponder;
 import com.cloudbase.CBHelperResponse;
@@ -55,6 +56,11 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 						name.isEmpty()||
 						phonenumber.isEmpty()||
 						password.isEmpty()){
+
+						Toast toast = Toast.makeText(getApplicationContext(),
+								"You must fill all the fields",
+								Toast.LENGTH_LONG);
+						toast.show();
 					return;
 				}
 				

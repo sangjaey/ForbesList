@@ -52,8 +52,8 @@ public class SearchActivity extends Activity implements CBHelperResponder {
         	    else{
         	    	Context context = getApplicationContext();
                 	CharSequence text = "Fill in both fields please";
-                	int duration = Toast.LENGTH_SHORT;
-
+                	int duration = Toast.LENGTH_LONG;
+                	
                 	Toast toast = Toast.makeText(context, text, duration);
                 	toast.show();
         	    }

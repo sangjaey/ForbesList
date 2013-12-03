@@ -36,8 +36,8 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements CBHelperResponder {
 	Button joinButton, button1;
 	public static CBHelper myHelper;
-	String pw,email;
-	
+	String pw, email;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,26 +47,6 @@ public class MainActivity extends Activity implements CBHelperResponder {
 		myHelper = new CBHelper("forbeslist",
 				"cac21deef7dd81d8af7506cd257173d2", this);
 		myHelper.setPassword(md5("1234"));
-
-		
-		/*
-		JSONObject in = new JSONObject();
-		myHelper = new CBHelper("forbeslist",
-				"cac21deef7dd81d8af7506cd257173d2", this);
-		myHelper.setPassword(md5("1234"));
-		try {
-			in.put("name", "sangwon");
-			in.put("pw", "123123"); // in= new JSONObject().put("name",
-									// "sangwon");
-		} catch (JSONException e) { // TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		myHelper.insertDocument(in, "test", this);
-		CBSearchCondition cond = new CBSearchCondition("nameValuePairs.name",
-				CBSearchConditionOperator.CBOperatorEqual, "sangwon");
-		
-		myHelper.searchDocument("test", cond, this);
-		 */
 	}
 
 	// move to register button
@@ -86,21 +66,18 @@ public class MainActivity extends Activity implements CBHelperResponder {
 	// try to log in
 	public void addListenerOnButton2() {
 		final Context context = this;
-		
+
 		button1 = (Button) findViewById(R.id.button1);
 		button1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				// go to next activity with 3 values passed
-				// 
 				EditText emailText = (EditText) findViewById(R.id.email);
 				EditText passwordText = (EditText) findViewById(R.id.pw);
 
 				email = emailText.getText().toString();
 				pw = passwordText.getText().toString();
 
-				CBSearchCondition cond = new CBSearchCondition(
-						"email",
+				CBSearchCondition cond = new CBSearchCondition("email",
 						CBSearchConditionOperator.CBOperatorEqual, email);
 				cond.setLimit(3);
 				myHelper.searchDocument("test", cond, MainActivity.this);
@@ -122,27 +99,19 @@ public class MainActivity extends Activity implements CBHelperResponder {
 		if (arg1.getData() instanceof List) {
 			if (((List) arg1.getData()).size() != 0) {
 				String s = (((List) arg1.getData()).get(0)).toString();
-				String pass = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("password");
-				if(pw.equals(pass)){
+				String pass = (String) ((com.google.gson.internal.StringMap) ((List) arg1
+						.getData()).get(0)).get("password");
+				if (pw.equals(pass)) {
 					Intent intent = new Intent(this, TabMainActivity.class);
 					intent.putExtra("userName", email);
 					startActivity(intent);
 				}
-				else{
-					Toast.makeText(this, "wrong password", Toast.LENGTH_LONG);
-				}
-						
-	/*			JSONObject result;
-				try {
-					result = new JSONObject(s);
-					// http://stackoverflow.com/questions/7705081/jax-rs-resteasy-service-return-json-string-without-double-quote
-					System.out.println(result.get("password"));
-					System.out.println("valuepair : "
-							+ result.get("nameValuePairs.password"));
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
+			} else {
+
+				Toast toast = Toast.makeText(getApplicationContext(),
+						"email and password doesnt match", Toast.LENGTH_LONG);
+				toast.show();
+
 			}
 
 		} else

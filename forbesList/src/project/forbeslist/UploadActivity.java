@@ -87,7 +87,7 @@ public class UploadActivity extends Activity {
         	    else{
         	    	Context context = getApplicationContext();
                 	CharSequence text = "Fill in both fields please";
-                	int duration = Toast.LENGTH_SHORT;
+                	int duration = Toast.LENGTH_LONG;
 
                 	Toast toast = Toast.makeText(context, text, duration);
                 	toast.show();
