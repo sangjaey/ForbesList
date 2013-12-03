@@ -7,19 +7,27 @@ public class Book {
 	String author;
 	Location loc;
 	String uploader;
-	
-	public Book(String title, String author, Location loc){
+	String price;
+	public Book(String title, String author, Location loc, String price){
 		this.title=title;
 		this.author=author;
 		this.loc =loc;
+		this.price = price;
 		
 	}
 	
-	public Book(String title, String author){
+	public Book(String title, String author,String price){
 		this.title=title;
 		this.author=author;
+		this.price=price;
 	}
 	
+	public String getPrice(){
+		return price;
+	}
+	public void setPrice(String price){
+		this.price=price;
+	}
 	public String getTitle() {
 		return title;
 	}

@@ -60,10 +60,12 @@ public class UploadActivity extends Activity {
 				boolean nonNullFlag = false;
 				EditText tText = (EditText) findViewById(R.id.title_u);
 				EditText aText = (EditText) findViewById(R.id.author_u);
-				
+				EditText pText = (EditText) findViewById(R.id.price_u);
+
                 String title = tText.getText().toString();
                 String author = aText.getText().toString();
-                nonNullFlag = !(title.equals("") || author.equals(""));
+                String price = pText.getText().toString();
+                nonNullFlag = !(title.equals("") || author.equals("")||price.equals(""));
                 Book in = null;
         	    if(nonNullFlag){
         	    	//put in database
@@ -73,7 +75,7 @@ public class UploadActivity extends Activity {
 					 in.put("author", author);
 					 in.put("location", location);*/
 
-					 in = new Book(title, author, location);
+					 in = new Book(title, author, location,price);
 					 in.setUploader(uploader);
 					 
 					 if (photo!=null){

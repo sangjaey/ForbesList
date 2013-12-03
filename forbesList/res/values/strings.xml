@@ -43,5 +43,6 @@
     <string name="search">Search</string>
     <string name="upload">Upload</string>
     <string name="takeSnapShot">Take Snapshot Now</string>
+    <string name="search_price">Price</string>
 
 </resources>
