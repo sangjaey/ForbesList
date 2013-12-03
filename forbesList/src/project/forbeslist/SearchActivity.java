@@ -107,6 +107,7 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				String title = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("title");
 				String author = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("author");
 				String price = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("price");
+				String email = (String)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("uploader");
 				
 				if(((StringMap<?>)((StringMap<?>)((List<?>)arg1.getData()).get(i)).get("cb_location"))==null){
 					loc_lat=0.0;
@@ -136,8 +137,8 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				else arrayChildren.add(2,"Author: " + author);
 				if (arrayChildren.size()<4) arrayChildren.add(msg);
 				else arrayChildren.add(3,msg);
-				if (arrayChildren.size()<5) arrayChildren.add("Seller Email: "+userEmail);
-				else arrayChildren.add(4,"Seller Email: "+userEmail);
+				if (arrayChildren.size()<5) arrayChildren.add("Seller Email: "+email);
+				else arrayChildren.add(4,"Seller Email: "+email);
 				if (arrayChildren.size()<6) arrayChildren.add("Book Price: "+price);
 				else arrayChildren.add(5,"Book Price: "+price);
 				
