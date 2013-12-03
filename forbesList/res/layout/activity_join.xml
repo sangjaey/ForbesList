@@ -64,41 +64,6 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/editText1"
-        android:hint="@string/exampleEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/TextView01"
-        android:layout_toRightOf="@+id/TextView01"
-        android:inputType="textEmailAddress"
-        android:ems="10" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:hint="@string/nameExample"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextView02"
-        android:layout_alignBottom="@+id/TextView02"
-        android:layout_alignRight="@+id/editText1"
-        android:layout_toRightOf="@+id/TextView02"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/editText3"
-        android:hint="@string/examplePhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignTop="@+id/TextView03"
-        android:layout_toRightOf="@+id/TextView03"
-        android:inputType="phone"
-        android:ems="10" />
-
-    <EditText
         android:id="@+id/editText4"
         android:hint="@string/examplePw"
         android:layout_width="wrap_content"
@@ -129,5 +94,39 @@
         android:layout_below="@+id/tabText"
         android:layout_centerHorizontal="true"
         android:textColor="@color/red"/>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView02"
+        android:layout_alignBottom="@+id/TextView02"
+        android:layout_alignLeft="@+id/editText1"
+        android:ems="10"
+        android:hint="@string/nameExample" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TextView03"
+        android:layout_alignLeft="@+id/editText2"
+        android:ems="10"
+        android:hint="@string/examplePhone"
+        android:inputType="phone" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/TextView01"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/TextView03"
+        android:ems="10"
+        android:hint="@string/exampleEmail"
+        android:inputType="textEmailAddress" />
 
 </RelativeLayout>
