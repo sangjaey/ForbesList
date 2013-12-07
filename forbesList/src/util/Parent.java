@@ -1,4 +1,4 @@
-package project.forbeslist;
+package util;
 import java.util.ArrayList;
 
 public class Parent {

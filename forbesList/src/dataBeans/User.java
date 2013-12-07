@@ -1,4 +1,4 @@
-package DataBeans;
+package dataBeans;
 
 public class User {
 	String email;

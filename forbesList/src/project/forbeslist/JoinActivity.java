@@ -2,7 +2,6 @@ package project.forbeslist;
 
 import java.util.List;
 
-import DataBeans.User;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +19,8 @@ import com.cloudbase.CBHelperResponse;
 import com.cloudbase.CBQueuedRequest;
 import com.cloudbase.datacommands.CBSearchCondition;
 import com.cloudbase.datacommands.CBSearchConditionOperator;
+
+import dataBeans.User;
 
 public class JoinActivity extends Activity implements CBHelperResponder{
 	Button button1;

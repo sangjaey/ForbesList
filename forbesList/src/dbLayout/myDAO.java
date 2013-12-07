@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import project.forbeslist.MainActivity;
 import project.forbeslist.SearchActivity;
-import Util.Util;
+import util.Util;
 import android.app.Activity;
 
 import com.cloudbase.CBHelper;

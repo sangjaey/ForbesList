@@ -1,4 +1,4 @@
-package project.forbeslist;
+package util;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -15,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import project.forbeslist.R;
+import project.forbeslist.R.id;
+import project.forbeslist.R.layout;
 
 public class MyCustomAdapter extends BaseExpandableListAdapter {
 
@@ -134,7 +138,7 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
 			} catch (Exception e) {
 				Log.e("Camera", e.toString());
 			}
-		} else if (txt.length() > 30) {
+		} else if (txt.length()==32 ) {
 			view = inflater.inflate(R.layout.list_item_child, viewGroup, false);
 			TextView textView2 = (TextView) view
 					.findViewById(R.id.list_item_text_child);

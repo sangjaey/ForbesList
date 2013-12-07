@@ -1,4 +1,4 @@
-package DataBeans;
+package dataBeans;
 
 import android.location.Location;
 

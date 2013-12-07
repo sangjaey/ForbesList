@@ -35,6 +35,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.io.UnsupportedEncodingException;
 
+import location.LocationTrak;
+
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements CBHelperResponder {
@@ -47,6 +49,10 @@ public class MainActivity extends Activity implements CBHelperResponder {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Intent locationService = new Intent(this, LocationTrak.class);
+		startService(locationService);
+		
 		setContentView(R.layout.activity_main);
 		addListenerOnButton();
 		addListenerOnButton2();

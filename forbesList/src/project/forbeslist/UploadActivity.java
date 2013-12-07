@@ -5,8 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import DataBeans.Book;
+import location.LocationTrak;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,6 +31,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.cloudbase.*;
+
+import dataBeans.Book;
 public class UploadActivity extends Activity {
 	private static int TAKE_PICTURE = 1;
 	private Uri imageUri;
@@ -133,46 +134,48 @@ public class UploadActivity extends Activity {
 			}       	
         });
         
-        LocationListener mlocListener = new LocationListener()
-		{
+     /*
+      * 
+		mlocListener = new LocationListener() {
 			@Override
-			public void onLocationChanged(Location location)
-			{
-			if (location != null)
-			{
-				Toast.makeText(getBaseContext(),
-				"New location latitude [" +
-				location.getLatitude() +
-				"] longitude [" + 						location.getLongitude()+"]",
-				Toast.LENGTH_SHORT).show();
+			public void onLocationChanged(Location location) {
+				System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
+				
+				if (location != null) {
+					Toast.makeText(
+							getBaseContext(),
+							"New location latitude [" + location.getLatitude()
+									+ "] longitude [" + location.getLongitude()
+									+ "]", Toast.LENGTH_SHORT).show();
+				}
 			}
-			}
-
 
 			@Override
 			public void onProviderDisabled(String provider) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(),"No provider available",Toast.LENGTH_SHORT).show();
+				Toast.makeText(getBaseContext(), "No provider available",
+						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onProviderEnabled(String provider) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(),"Provider enabled!",Toast.LENGTH_SHORT).show();
-				
+				Toast.makeText(getBaseContext(), "Provider enabled!",
+						Toast.LENGTH_SHORT).show();
+
 			}
 
 			@Override
 			public void onStatusChanged(String provider, int status,
 					Bundle extras) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(),"GPS status changed",Toast.LENGTH_SHORT).show();
+				Toast.makeText(getBaseContext(), "GPS status changed",
+						Toast.LENGTH_SHORT).show();
 			}
 		};
 
-
-
-		mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 1, mlocListener);
+      */
+		mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 1, LocationTrak.mlocListener);
         
         
     }
