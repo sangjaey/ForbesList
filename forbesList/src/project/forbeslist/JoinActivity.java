@@ -2,6 +2,7 @@ package project.forbeslist;
 
 import java.util.List;
 
+import DataBeans.User;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -63,11 +64,12 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 						toast.show();
 					return;
 				}
-				
+				/*
 				CBSearchCondition cond = new CBSearchCondition(
 						"email",
 						CBSearchConditionOperator.CBOperatorEqual, email);
-				MainActivity.myHelper.searchDocument("test", cond, JoinActivity.this);
+				MainActivity.myHelper.searchDocument("test", cond, JoinActivity.this);*/
+				MainActivity.UserDao.read(email,"email" ,JoinActivity.this);
 
 				
 			}
@@ -84,7 +86,6 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 	@Override
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 		
-		// TODO Auto-generated method stub
 		
 		if (arg1.getData() instanceof List) {
 			List results = (List) arg1.getData();
@@ -106,7 +107,9 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 			return;
 		}
 		User newUser = new User(email, password, name,phonenumber);
-		MainActivity.myHelper.insertDocument(newUser, "test");
+		//TODO: DAO
+		//MainActivity.myHelper.insertDocument(newUser, "test");
+		MainActivity.UserDao.insert(newUser);
 		Intent intent = new Intent(context, TabMainActivity.class);
 		intent.putExtra("userName", email);
 		startActivity(intent);
@@ -114,14 +117,12 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
 		super.onRestart();
 		validEmail = false;
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		validEmail = false;
 	}

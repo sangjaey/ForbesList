@@ -1,4 +1,4 @@
-package project.forbeslist;
+package DataBeans;
 
 import android.location.Location;
 

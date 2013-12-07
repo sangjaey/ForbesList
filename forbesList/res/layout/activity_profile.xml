@@ -60,4 +60,14 @@
         android:layout_marginLeft="15dp"
         android:ems="10"/>
 
+    <TextView
+        android:id="@+id/haha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name_p"
+        android:layout_below="@+id/name_p"
+        android:layout_marginTop="36dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>

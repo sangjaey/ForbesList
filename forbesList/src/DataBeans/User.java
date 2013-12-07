@@ -1,4 +1,4 @@
-package project.forbeslist;
+package DataBeans;
 
 public class User {
 	String email;

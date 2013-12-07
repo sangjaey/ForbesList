@@ -7,6 +7,10 @@ import com.cloudbase.datacommands.CBSearchCondition;
 import com.cloudbase.datacommands.CBSearchConditionOperator;
 import com.google.gson.Gson;
 
+import dbLayout.BookDAO;
+import dbLayout.UserDAO;
+import dbLayout.myDAO;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.Bundle;
@@ -35,7 +39,9 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements CBHelperResponder {
 	Button joinButton, button1;
-	public static CBHelper myHelper;
+	//public static CBHelper myHelper;
+	public static UserDAO UserDao;
+	public static BookDAO BookDao;
 	String pw, email;
 
 	@Override
@@ -44,9 +50,13 @@ public class MainActivity extends Activity implements CBHelperResponder {
 		setContentView(R.layout.activity_main);
 		addListenerOnButton();
 		addListenerOnButton2();
-		myHelper = new CBHelper("forbeslist",
+		/*myHelper = new CBHelper("forbeslist",
 				"cac21deef7dd81d8af7506cd257173d2", this);
-		myHelper.setPassword(md5("1234"));
+		myHelper.setPassword(Util.md5("1234"));*/
+		UserDao = new UserDAO();
+		UserDao.init(this);
+		BookDao = new BookDAO();
+		BookDao.init(this);
 	}
 
 	// move to register button
@@ -77,10 +87,11 @@ public class MainActivity extends Activity implements CBHelperResponder {
 				email = emailText.getText().toString();
 				pw = passwordText.getText().toString();
 
-				CBSearchCondition cond = new CBSearchCondition("email",
+				/*CBSearchCondition cond = new CBSearchCondition("email",
 						CBSearchConditionOperator.CBOperatorEqual, email);
 				cond.setLimit(3);
-				myHelper.searchDocument("test", cond, MainActivity.this);
+				myHelper.searchDocument("test", cond, MainActivity.this);*/
+				UserDao.read(email, "email",MainActivity.this);
 
 			}
 		});
@@ -118,24 +129,6 @@ public class MainActivity extends Activity implements CBHelperResponder {
 			System.out.println("###################" + arg1.getData());
 	}
 
-	private static String md5(String s) {
-		try {
-			// Create MD5 Hash
-			MessageDigest digest = java.security.MessageDigest
-					.getInstance("MD5");
-			digest.update(s.getBytes());
-			byte messageDigest[] = digest.digest();
-
-			// Create Hex String
-			StringBuffer hexString = new StringBuffer();
-			for (int i = 0; i < messageDigest.length; i++)
-				hexString.append(String.format("%02x", messageDigest[i]));
-			return hexString.toString();
-
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return "";
-	}
+	
 
 }

@@ -45,11 +45,12 @@ public class SearchActivity extends Activity implements CBHelperResponder {
                 nonNullFlag = !(title.equals("") || author.equals(""));
         	    if(nonNullFlag){
         	    	//search from db. search by title/search by author
-        	    	CBSearchCondition cond = new CBSearchCondition(
+        	    	/*CBSearchCondition cond = new CBSearchCondition(
     						"title",
     						CBSearchConditionOperator.CBOperatorEqual, title);
     				MainActivity.myHelper.searchDocument("book", cond, SearchActivity.this);
-        	    	
+        	    	*/
+        	    	MainActivity.BookDao.read(title,"title", SearchActivity.this);
         	    }
         	    else{
         	    	Context context = getApplicationContext();
@@ -152,7 +153,8 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 					arrayChildren.add(0,file_id);
 					if (file_id!=null){
 						System.out.println("fileid: " + file_id);
-						MainActivity.myHelper.downloadFile(file_id, SearchActivity.this);
+						//MainActivity.myHelper.downloadFile(file_id, SearchActivity.this);
+						MainActivity.BookDao.readFile(file_id, SearchActivity.this);
 						System.out.println("DL command issued");
 					}
 				}

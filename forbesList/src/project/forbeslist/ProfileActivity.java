@@ -25,12 +25,14 @@ public class ProfileActivity extends Activity implements CBHelperResponder{
         setContentView(R.layout.activity_profile);
         
 
+        
 		String userEmail = getIntent().getExtras().getString("userName");
 		System.out.println("ashdfjkasdjfkajskl"+userEmail);
-		CBSearchCondition cond = new CBSearchCondition(
+		/*CBSearchCondition cond = new CBSearchCondition(
 				"email",
 				CBSearchConditionOperator.CBOperatorEqual, userEmail);
-		MainActivity.myHelper.searchDocument("test", cond, ProfileActivity.this);
+		MainActivity.myHelper.searchDocument("test", cond, ProfileActivity.this);*/
+		MainActivity.UserDao.read(userEmail, "email",ProfileActivity.this);
     }
 	
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {

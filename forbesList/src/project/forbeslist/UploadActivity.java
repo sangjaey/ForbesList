@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import DataBeans.Book;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -42,15 +44,23 @@ public class UploadActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
         mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        
+        File file = new File(Environment.getExternalStorageDirectory(), "Pic.jpg");
+	    if(file.exists()){
+	    	file.delete();
+	    }
+        
         Button uploadBtn = (Button) findViewById(R.id.button_u);
         Button snapBtn = (Button) findViewById(R.id.button1);
         uploadBtn.setOnClickListener(new OnClickListener(){
         	@Override
 			public void onClick(View arg0) {
-        		MainActivity.myHelper.setUseLocation(true);
+        		//MainActivity.myHelper.setUseLocation(true);
+        		MainActivity.BookDao.setUseLocation(true);
 				Location location = mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				if (location!=null) {
-					MainActivity.myHelper.setCurrentLocation(location);
+					//MainActivity.myHelper.setCurrentLocation(location);
+					MainActivity.BookDao.setCurrentLocation(location);
 					Toast.makeText(getBaseContext(), "Current loc: lon: "+ location.getLongitude() + "lat: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
 				}
 				else 					
@@ -81,9 +91,14 @@ public class UploadActivity extends Activity {
 					 if (photo!=null){
 						 ArrayList<File> files = new ArrayList<File>();
 					     files.add(photo); 
-					     MainActivity.myHelper.insertDocument(in, "book", files, r);
+					     
+					     
+					     //!!!!pic.jpg delete
+					     //MainActivity.myHelper.insertDocument(in, "book", files, r);
+					     MainActivity.BookDao.insert(in, files, r);
 					 }
-					 else MainActivity.myHelper.insertDocument(in, "book");
+					 else //MainActivity.myHelper.insertDocument(in, "book");
+						 MainActivity.BookDao.insert(in);
         	    	
         	    	//toast to say upload done.
         	    	Context context = getApplicationContext();
