@@ -26,6 +26,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="project.forbeslist.MainActivity"
             android:label="@string/app_name" >
@@ -35,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="location.LocationTrak"/>
         <activity
             android:name="project.forbeslist.JoinActivity"
             android:label="@string/title_activity_join" >

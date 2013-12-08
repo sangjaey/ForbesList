@@ -138,12 +138,12 @@ public class MyCustomAdapter extends BaseExpandableListAdapter {
 			} catch (Exception e) {
 				Log.e("Camera", e.toString());
 			}
-		} else if (txt.length()==32 ) {
+		} /*else if (txt.length()==32 ) {
 			view = inflater.inflate(R.layout.list_item_child, viewGroup, false);
 			TextView textView2 = (TextView) view
 					.findViewById(R.id.list_item_text_child);
 			textView2.setText("====  INFORMATION  ====");
-		} else {
+		}*/ else {
 			view = inflater.inflate(R.layout.list_item_child, viewGroup, false);
 			TextView textView2 = (TextView) view
 					.findViewById(R.id.list_item_text_child);

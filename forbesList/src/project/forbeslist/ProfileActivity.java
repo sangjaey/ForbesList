@@ -2,15 +2,15 @@ package project.forbeslist;
  
 import java.util.List;
 
-import com.cloudbase.CBHelperResponder;
-import com.cloudbase.CBHelperResponse;
-import com.cloudbase.CBQueuedRequest;
-import com.cloudbase.datacommands.CBSearchCondition;
-import com.cloudbase.datacommands.CBSearchConditionOperator;
-
+import Adaptors.DBUser;
+import Builders.BuildUser;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.cloudbase.CBHelperResponder;
+import com.cloudbase.CBHelperResponse;
+import com.cloudbase.CBQueuedRequest;
  
 public class ProfileActivity extends Activity implements CBHelperResponder{
     private String name;
@@ -36,13 +36,19 @@ public class ProfileActivity extends Activity implements CBHelperResponder{
     }
 	
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
+		DBUser dbUser = new BuildUser();
+		dbUser.buildUserFromResponse(arg1);
 		TextView emailView = (TextView) findViewById(R.id.email_p);
 		TextView phoneView = (TextView) findViewById(R.id.phone_p);
 		TextView nameView = (TextView) findViewById(R.id.name_p);
 		
-		email = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("email");
-		name = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("name");
-		phonenumber = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("phonenumber");
+		email = dbUser.getEmail();
+		name = dbUser.getName();
+		phonenumber = dbUser.getPhonenumber();
+		
+//		email = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("email");
+//		name = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("name");
+//		phonenumber = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("phonenumber");
 		
 		nameView.setText(name);
 		emailView.setText(email);

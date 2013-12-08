@@ -10,7 +10,7 @@ import com.cloudbase.datacommands.CBSearchConditionOperator;
 import android.location.Location;
 
 public class BookDAO extends myDAO {
-
+	public final String BOOK_DB_NAME = "book";
 	public void setUseLocation(boolean b) {
 		myHelper.setUseLocation(true);
 	}
@@ -21,13 +21,13 @@ public class BookDAO extends myDAO {
 
 	@Override
 	public void insert(Object o) {
-		myHelper.insertDocument(o, "book");
+		myHelper.insertDocument(o,  BOOK_DB_NAME);
 
 	}
 
 	@Override
 	public void insert(Object o, ArrayList<File> files, CBHelperResponder r) {
-		myHelper.insertDocument(o, "book", files, r);
+		myHelper.insertDocument(o, BOOK_DB_NAME, files, r);
 
 	}
 
@@ -38,8 +38,7 @@ public class BookDAO extends myDAO {
 		CBSearchCondition cond = new CBSearchCondition(field,
 				CBSearchConditionOperator.CBOperatorEqual, object);
 		cond.setLimit(limit);
-		myHelper.searchDocument("book", cond, a);
-
+		myHelper.searchDocument(BOOK_DB_NAME, cond, a);
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class BookDAO extends myDAO {
 
 		CBSearchCondition cond = new CBSearchCondition(field,
 				CBSearchConditionOperator.CBOperatorEqual, object);
-		myHelper.searchDocument("book", cond, a);
+		myHelper.searchDocument(BOOK_DB_NAME, cond, a);
 
 	}
 

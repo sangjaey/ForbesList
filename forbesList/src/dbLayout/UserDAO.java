@@ -8,15 +8,16 @@ import com.cloudbase.datacommands.CBSearchCondition;
 import com.cloudbase.datacommands.CBSearchConditionOperator;
 
 public class UserDAO extends myDAO {
+	public final String USER_DB_NAME = "test";
 	@Override
 	public void insert(Object o) {
-		myHelper.insertDocument(o, "test");
+		myHelper.insertDocument(o, USER_DB_NAME);
 
 	}
 
 	@Override
 	public void insert(Object o, ArrayList<File> files, CBHelperResponder r) {
-		myHelper.insertDocument(o, "test", files, r);
+		myHelper.insertDocument(o, USER_DB_NAME, files, r);
 
 	}
 
@@ -27,7 +28,7 @@ public class UserDAO extends myDAO {
 		CBSearchCondition cond = new CBSearchCondition(field,
 				CBSearchConditionOperator.CBOperatorEqual, object);
 		cond.setLimit(limit);
-		myHelper.searchDocument("test", cond, a);
+		myHelper.searchDocument(USER_DB_NAME, cond, a);
 
 	}
 
@@ -36,7 +37,7 @@ public class UserDAO extends myDAO {
 
 		CBSearchCondition cond = new CBSearchCondition(field,
 				CBSearchConditionOperator.CBOperatorEqual, object);
-		myHelper.searchDocument("test", cond, a);
+		myHelper.searchDocument(USER_DB_NAME, cond, a);
 
 	}
 

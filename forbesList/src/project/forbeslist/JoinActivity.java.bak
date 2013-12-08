@@ -2,8 +2,6 @@ package project.forbeslist;
 
 import java.util.List;
 
-import Adaptors.NewUser;
-import Builders.BuildUser;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +12,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cloudbase.CBHelperResponder;
 import com.cloudbase.CBHelperResponse;
 import com.cloudbase.CBQueuedRequest;
+import com.cloudbase.datacommands.CBSearchCondition;
+import com.cloudbase.datacommands.CBSearchConditionOperator;
 
 public class JoinActivity extends Activity implements CBHelperResponder{
 	Button button1;
@@ -56,14 +55,15 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 						name.isEmpty()||
 						phonenumber.isEmpty()||
 						password.isEmpty()){
-
-						Toast toast = Toast.makeText(getApplicationContext(),
-								"You must fill all the fields",
-								Toast.LENGTH_LONG);
-						toast.show();
 					return;
 				}
-				MainActivity.UserDao.read(email,"email" ,JoinActivity.this);
+				
+				CBSearchCondition cond = new CBSearchCondition(
+						"email",
+						CBSearchConditionOperator.CBOperatorEqual, email);
+				MainActivity.myHelper.searchDocument("test", cond, JoinActivity.this);
+
+				
 			}
 		});
 	}
@@ -77,11 +77,19 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 
 	@Override
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
+		
+		// TODO Auto-generated method stub
+		
 		if (arg1.getData() instanceof List) {
 			List results = (List) arg1.getData();
 			if (results.size() == 0) {
 				validEmail = true;
 			}
+			for(int i=0;i<results.size();i++){
+				String email = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(i)).get("email");
+				System.out.println("Printing emails     "+i+":" + email);
+			}
+			
 		} else{
 			System.out.println("###################" + arg1.getData());			
 		}
@@ -91,23 +99,23 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 			error_text.setText("Email Already In use");
 			return;
 		}
-		NewUser newUser = new BuildUser();
-		newUser.buildUserFromInput(email, password, name, phonenumber);
-
-		MainActivity.UserDao.insert(newUser.getUser());
+		User newUser = new User(email, password, name,phonenumber);
+		MainActivity.myHelper.insertDocument(newUser, "test");
 		Intent intent = new Intent(context, TabMainActivity.class);
-		intent.putExtra("userName", email);
+//		intent.putExtra("userName", );
 		startActivity(intent);
 	}
 
 	@Override
 	protected void onRestart() {
+		// TODO Auto-generated method stub
 		super.onRestart();
 		validEmail = false;
 	}
 
 	@Override
 	protected void onResume() {
+		// TODO Auto-generated method stub
 		super.onResume();
 		validEmail = false;
 	}

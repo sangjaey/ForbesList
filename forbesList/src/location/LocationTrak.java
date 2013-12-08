@@ -10,6 +10,17 @@ import android.widget.Toast;
 
 public class LocationTrak extends Service {
 	public static LocationListener mlocListener;
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub
+		if(mlocListener == null){
+			System.out.println("FUCKFUCKFUCKFUCKFUCKFUCKFUCK");
+			
+		}
+		return super.onStartCommand(intent, flags, startId);
+	}
+
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -20,7 +31,7 @@ public class LocationTrak extends Service {
 
 	@Override
 	public void onCreate() {
-
+		System.out.println("aaaaaaaaaaaaaabbbbbbbbbbbbbbbbbasfjlkafjf;");
 		mlocListener = new LocationListener() {
 			@Override
 			public void onLocationChanged(Location location) {

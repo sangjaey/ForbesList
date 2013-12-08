@@ -7,14 +7,8 @@ import java.util.Locale;
 
 import util.MyCustomAdapter;
 import util.Parent;
-
-import com.cloudbase.CBHelperResponder;
-import com.cloudbase.CBHelperResponse;
-import com.cloudbase.CBQueuedRequest;
-import com.cloudbase.datacommands.CBSearchCondition;
-import com.cloudbase.datacommands.CBSearchConditionOperator;
-import com.google.gson.internal.StringMap;
-
+import Adaptors.DBBook;
+import Builders.BuildBook;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
@@ -27,6 +21,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
+import com.cloudbase.CBHelperResponder;
+import com.cloudbase.CBHelperResponse;
+import com.cloudbase.CBQueuedRequest;
+import com.google.gson.internal.StringMap;
 
 public class SearchActivity extends Activity implements CBHelperResponder {
 
@@ -52,13 +51,6 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 			//	String author = aText.getText().toString();
 				nonNullFlag = !(title.equals(""));
 				if (nonNullFlag) {
-					// search from db. search by title/search by author
-					/*
-					 * CBSearchCondition cond = new CBSearchCondition( "title",
-					 * CBSearchConditionOperator.CBOperatorEqual, title);
-					 * MainActivity.myHelper.searchDocument("book", cond,
-					 * SearchActivity.this);
-					 */
 					MainActivity.BookDao.read(title, "title",
 							SearchActivity.this);
 				} else {
@@ -84,20 +76,15 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 				String strUri = "###" + imageUri.toString();
 				for (int i = 0; i < arrayParents.size(); i++) {
 					Parent p = arrayParents.get(i);
-					ArrayList<String> c = p.getArrayChildren();
-
+					
 					// if file id equals strUri parsed..
-					String fileid = c.get(0);
+					String fileid = p.getFileId();
 					System.out.println("fileid: " + fileid);
 					System.out.println("uri: " + strUri.substring(46, 78));
 					if (fileid != null
 							&& fileid.equals(strUri.substring(46, 78))) {
 						System.out.println("DL received for imaging");
-						if (c.size() < 7)
-							c.add(strUri);
-						else
-							c.add(6, strUri);
-						p.setArrayChildren(c);
+						p.addFileId(strUri);
 						arrayParents.set(i, p);
 						adap.notifyDataSetChanged();
 					}
@@ -108,107 +95,41 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 		// TODO Auto-generated method stub
 
 		else if (arg1.getData() instanceof List) {
-			Double loc_lat = 0.0;
-			Double loc_lon = 0.0;
+			
 			List<?> results = (List<?>) arg1.getData();
 
-			ArrayList<String> arrayChildren;
 			for (int i = 0; i < results.size(); i++) {
 				System.out.println("LOOP START");
-				arrayChildren = new ArrayList<String>();
-				String title = (String) ((StringMap<?>) ((List<?>) arg1
-						.getData()).get(i)).get("title");
-				String author = (String) ((StringMap<?>) ((List<?>) arg1
-						.getData()).get(i)).get("author");
-				String price = (String) ((StringMap<?>) ((List<?>) arg1
-						.getData()).get(i)).get("price");
-				String email = (String) ((StringMap<?>) ((List<?>) arg1
-						.getData()).get(i)).get("uploader");
-
-				if (((StringMap<?>) ((StringMap<?>) ((List<?>) arg1.getData())
-						.get(i)).get("cb_location")) == null) {
-					loc_lat = 0.0;
-					loc_lon = 0.0;
-				}
-
-				else {
-					loc_lat = (Double) ((StringMap<?>) ((StringMap<?>) ((List<?>) arg1
-							.getData()).get(i)).get("cb_location")).get("lat");
-					loc_lon = (Double) ((StringMap<?>) ((StringMap<?>) ((List<?>) arg1
-							.getData()).get(i)).get("cb_location")).get("lng");
-				}
-				ArrayList<?> a = (ArrayList<?>) (((StringMap<?>) ((List<?>) arg1
-						.getData()).get(i)).get("cb_files"));
-
-				// TODO: fetch image info here if you can
-
+				
+				//Build Book
+				DBBook dbBook = new BuildBook();
+				dbBook.buildBookFromResponse(arg1, i);
+								
+				//Get Geocode
+				String geoLocation = getGeoLocation(dbBook);
+				
+				//Build Parent
 				Parent parent = new Parent();
-				parent.setTitle(title + ", by " + author);
-				arrayChildren = new ArrayList<String>();
-				String msg;
-				if (loc_lat == 0.0 && loc_lon == 0.0)
-					msg = "Location: Not Specified";
-				else{
-					/*
-					msg = "Location: " + loc_lat.toString().substring(0, 6)
-							+ "," + loc_lon.toString().substring(0, 6);
-				*/
-					Geocoder geocoder;
-					List<Address> addresses = null;
-					geocoder = new Geocoder(this, Locale.getDefault());
-					try {
-						addresses = geocoder.getFromLocation(loc_lat, loc_lon, 1);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					String address = addresses.get(0).getAddressLine(0);
-					String city = addresses.get(0).getAddressLine(1);
-					msg = address+", "+city;
-				}
-				if (arrayChildren.size() < 2)
-					arrayChildren.add("Title: " + title);
-				else
-					arrayChildren.add(1, "Title: " + title);
-				if (arrayChildren.size() < 3)
-					arrayChildren.add("Author: " + author);
-				else
-					arrayChildren.add(2, "Author: " + author);
-				if (arrayChildren.size() < 4)
-					arrayChildren.add(msg);
-				else
-					arrayChildren.add(3, msg);
-				if (arrayChildren.size() < 5)
-					arrayChildren.add("Seller Email: " + email);
-				else
-					arrayChildren.add(4, "Seller Email: " + email);
-				if (arrayChildren.size() < 6)
-					arrayChildren.add("Book Price: " + price);
-				else
-					arrayChildren.add(5, "Book Price: " + price);
-
-				if (a == null) {
-					arrayChildren.add(0, "====  INFORMATION  ====");
-					arrayChildren.add("No image available");
-				} else {
-					String file_id = (a.get(0)).toString().substring(9, 41);
-					arrayChildren.add(0, file_id);
+				parent.setTitle(dbBook.getTitle() + ", by " + dbBook.getAuthor());
+				parent.addChildByBook(dbBook, geoLocation);
+				
+				//Look for files
+				ArrayList<?> arr = (ArrayList<?>) (((StringMap<?>) ((List<?>) arg1
+						.getData()).get(i)).get("cb_files"));				
+				if(arr!=null){
+					String file_id = (arr.get(0)).toString().substring(9, 41);
+					parent.addFileId(file_id);
 					if (file_id != null) {
 						System.out.println("fileid: " + file_id);
-						// MainActivity.myHelper.downloadFile(file_id,
-						// SearchActivity.this);
 						MainActivity.BookDao.readFile(file_id,
 								SearchActivity.this);
 						System.out.println("DL command issued");
 					}
 				}
-
-				parent.setArrayChildren(arrayChildren);
+				
+				//add new parent to parent array
 				arrayParents.add(parent);
-				arrayChildren = new ArrayList<String>();
 				System.out.println("LOOP END");
-
 			}
 			// sets the adapter that provides data to the list.
 			System.out.println("Adapter Set");
@@ -222,5 +143,25 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 		}
 
 	}
+	private String getGeoLocation(DBBook dbBook){
+		String msg;
+		if (dbBook.getLat() == 0.0 && dbBook.getLon() == 0.0)
+			msg = "Location: Not Specified";
+		else{
+			Geocoder geocoder;
+			List<Address> addresses = null;
+			geocoder = new Geocoder(this, Locale.getDefault());
+			try {
+				addresses = geocoder.getFromLocation(dbBook.getLat(), dbBook.getLon(), 1);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
+			String address = addresses.get(0).getAddressLine(0);
+			String city = addresses.get(0).getAddressLine(1);
+			msg = address+", "+city;
+		}
+		return msg;
+	}
 }

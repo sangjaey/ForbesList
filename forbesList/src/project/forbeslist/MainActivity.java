@@ -2,46 +2,31 @@
 
 package project.forbeslist;
 
-import com.cloudbase.*;
-import com.cloudbase.datacommands.CBSearchCondition;
-import com.cloudbase.datacommands.CBSearchConditionOperator;
-import com.google.gson.Gson;
+import java.util.List;
 
-import dbLayout.BookDAO;
-import dbLayout.UserDAO;
-import dbLayout.myDAO;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import android.os.Bundle;
+import location.LocationTrak;
+import Adaptors.DBUser;
+import Builders.BuildUser;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
-import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import java.io.UnsupportedEncodingException;
-
-import location.LocationTrak;
-
 import android.widget.Toast;
+
+import com.cloudbase.CBHelperResponder;
+import com.cloudbase.CBHelperResponse;
+import com.cloudbase.CBQueuedRequest;
+
+import dbLayout.BookDAO;
+import dbLayout.UserDAO;
 
 public class MainActivity extends Activity implements CBHelperResponder {
 	Button joinButton, button1;
-	//public static CBHelper myHelper;
 	public static UserDAO UserDao;
 	public static BookDAO BookDao;
 	String pw, email;
@@ -49,16 +34,14 @@ public class MainActivity extends Activity implements CBHelperResponder {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Intent locationService = new Intent(this, LocationTrak.class);
 		startService(locationService);
-		
+
 		setContentView(R.layout.activity_main);
-		addListenerOnButton();
-		addListenerOnButton2();
-		/*myHelper = new CBHelper("forbeslist",
-				"cac21deef7dd81d8af7506cd257173d2", this);
-		myHelper.setPassword(Util.md5("1234"));*/
+		addRegisterButton();
+		addLoginButton();
+
 		UserDao = new UserDAO();
 		UserDao.init(this);
 		BookDao = new BookDAO();
@@ -66,7 +49,7 @@ public class MainActivity extends Activity implements CBHelperResponder {
 	}
 
 	// move to register button
-	public void addListenerOnButton() {
+	public void addRegisterButton() {
 		final Context context = this;
 		joinButton = (Button) findViewById(R.id.register);
 		joinButton.setOnClickListener(new OnClickListener() {
@@ -80,8 +63,7 @@ public class MainActivity extends Activity implements CBHelperResponder {
 	}
 
 	// try to log in
-	public void addListenerOnButton2() {
-		final Context context = this;
+	public void addLoginButton() {
 
 		button1 = (Button) findViewById(R.id.button1);
 		button1.setOnClickListener(new OnClickListener() {
@@ -93,10 +75,6 @@ public class MainActivity extends Activity implements CBHelperResponder {
 				email = emailText.getText().toString();
 				pw = passwordText.getText().toString();
 
-				/*CBSearchCondition cond = new CBSearchCondition("email",
-						CBSearchConditionOperator.CBOperatorEqual, email);
-				cond.setLimit(3);
-				myHelper.searchDocument("test", cond, MainActivity.this);*/
 				UserDao.read(email, "email",MainActivity.this);
 
 			}
@@ -115,26 +93,21 @@ public class MainActivity extends Activity implements CBHelperResponder {
 
 		if (arg1.getData() instanceof List) {
 			if (((List) arg1.getData()).size() != 0) {
-				String s = (((List) arg1.getData()).get(0)).toString();
-				String pass = (String) ((com.google.gson.internal.StringMap) ((List) arg1
-						.getData()).get(0)).get("password");
+				DBUser dbUser = new BuildUser();
+				dbUser.buildUserFromResponse(arg1);
+				String pass = dbUser.getPassword();
 				if (pw.equals(pass)) {
 					Intent intent = new Intent(this, TabMainActivity.class);
 					intent.putExtra("userName", email);
 					startActivity(intent);
 				}
 			} else {
-
 				Toast toast = Toast.makeText(getApplicationContext(),
 						"email and password doesnt match", Toast.LENGTH_LONG);
 				toast.show();
-
 			}
-
-		} else
+		} else {
 			System.out.println("###################" + arg1.getData());
+		}
 	}
-
-	
-
 }
