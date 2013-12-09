@@ -19,62 +19,6 @@
         android:textColor="#0099cc"
         android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/TextView04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView03"
-        android:layout_below="@+id/TextView03"
-        android:layout_marginTop="26dp"
-        android:text="@string/password"
-        android:textColor="#0099cc"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView01"
-        android:layout_below="@+id/TextView01"
-        android:layout_marginTop="26dp"
-        android:text="@string/name"
-        android:textColor="#0099cc"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tabText"
-        android:layout_marginTop="29dp"
-        android:text="@string/email"
-        android:textColor="#0099cc"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/TextView03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView02"
-        android:layout_below="@+id/TextView02"
-        android:layout_marginTop="23dp"
-        android:text="@string/phone"
-        android:textColor="#0099cc"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:hint="@string/examplePw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextView04"
-        android:layout_alignBottom="@+id/TextView04"
-        android:layout_alignRight="@+id/editText3"
-        android:layout_toRightOf="@+id/TextView04"
-        android:inputType="textPassword"
-        android:ems="10" />
-
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -106,27 +50,82 @@
         android:hint="@string/nameExample" />
 
     <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignTop="@+id/TextView04"
+        android:ems="10"
+        android:hint="@string/examplePw"
+        android:inputType="textPassword" />
+
+    <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView03"
         android:layout_alignBottom="@+id/TextView03"
         android:layout_alignLeft="@+id/editText2"
         android:ems="10"
         android:hint="@string/examplePhone"
-        android:inputType="phone" >
+        android:inputType="phone" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView03"
+        android:layout_centerVertical="true"
+        android:text="@string/password"
+        android:textColor="#0099cc"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView04"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_marginBottom="38dp"
+        android:text="@string/phone"
+        android:textColor="#0099cc"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText3"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_marginBottom="30dp"
+        android:text="@string/name"
+        android:textColor="#0099cc"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="27dp"
+        android:layout_marginLeft="23dp"
+        android:text="@string/email"
+        android:textColor="#0099cc"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/TextView01"
-        android:layout_marginLeft="14dp"
-        android:layout_toRightOf="@+id/TextView03"
+        android:layout_marginLeft="26dp"
+        android:layout_toRightOf="@+id/TextView04"
         android:ems="10"
         android:hint="@string/exampleEmail"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
