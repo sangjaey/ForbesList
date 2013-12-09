@@ -19,6 +19,7 @@ public class BuildUser implements NewUser, DBUser{
 	public void buildUserFromInput(String email, String pass, String name, String phone){
 		user = new User(email, pass, name, phone);
 	}
+	@SuppressWarnings("rawtypes")
 	public void buildUserFromResponse(CBHelperResponse res){
 		String pass = (String) ((com.google.gson.internal.StringMap) ((List) res
 				.getData()).get(0)).get("password");

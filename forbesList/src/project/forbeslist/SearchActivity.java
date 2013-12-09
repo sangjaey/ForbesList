@@ -9,7 +9,6 @@ import util.MyCustomAdapter;
 import util.Parent;
 import Adaptors.DBBook;
 import Builders.BuildBook;
-import Exceptions.DBException;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Address;

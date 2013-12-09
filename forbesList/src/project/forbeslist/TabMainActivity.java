@@ -2,18 +2,17 @@ package project.forbeslist;
  
 import android.app.TabActivity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
  
+@SuppressWarnings("deprecation")
 public class TabMainActivity extends TabActivity {
  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tab_main);
  
-		Resources ressources = getResources(); 
 		TabHost tabHost = getTabHost(); 
  
 		String userEmail = getIntent().getExtras().getString("userName");

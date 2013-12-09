@@ -40,30 +40,9 @@
         android:textColor="@color/red"/>
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextView02"
-        android:layout_alignBottom="@+id/TextView02"
-        android:layout_alignLeft="@+id/editText1"
-        android:ems="10"
-        android:hint="@string/nameExample" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignTop="@+id/TextView04"
-        android:ems="10"
-        android:hint="@string/examplePw"
-        android:inputType="textPassword" />
-
-    <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextView03"
         android:layout_alignBottom="@+id/TextView03"
         android:layout_alignLeft="@+id/editText2"
         android:ems="10"
@@ -102,30 +81,48 @@
         android:textColor="#0099cc"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editText2"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="27dp"
-        android:layout_marginLeft="23dp"
-        android:text="@string/email"
-        android:textColor="#0099cc"
-        android:textSize="20sp" />
-
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/TextView01"
-        android:layout_marginLeft="26dp"
-        android:layout_toRightOf="@+id/TextView04"
+        android:layout_alignBottom="@+id/TextView01"
+        android:layout_toRightOf="@+id/register_error"
         android:ems="10"
         android:hint="@string/exampleEmail"
         android:inputType="textEmailAddress" >
 
         <requestFocus />
     </EditText>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TextView02"
+        android:layout_alignLeft="@+id/register_error"
+        android:ems="10"
+        android:hint="@string/nameExample" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/register_error"
+        android:ems="10"
+        android:hint="@string/examplePw"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText2"
+        android:layout_marginBottom="23dp"
+        android:layout_marginRight="70dp"
+        android:layout_toLeftOf="@+id/button1"
+        android:text="@string/email"
+        android:textColor="#0099cc"
+        android:textSize="20sp" />
 
 </RelativeLayout>

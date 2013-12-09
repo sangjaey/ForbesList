@@ -22,47 +22,6 @@
 
     <requestFocus />
 
-    <EditText
-        android:id="@+id/pw"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/email"
-        android:layout_alignRight="@+id/email"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="@string/examplePw"
-        android:inputType="textPassword" >
-
-    </EditText>
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:background="@color/white"
-        android:minHeight="30dip"
-        android:minWidth="90dip"
-        android:text="@string/register"
-        android:textColor="@color/Orange"
-        android:textSize="25sp" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/register"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:background="@color/white"
-        android:minHeight="30dip"
-        android:minWidth="90dip"
-        android:text="@string/login"
-        android:textColor="@color/Orange"
-        android:textSize="25sp" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -70,17 +29,6 @@
         android:layout_alignBottom="@+id/email"
         android:layout_toLeftOf="@+id/tabText"
         android:text="@string/email"
-        android:textColor="@color/DarkOrange"
-        android:textSize="15sp"
-        android:typeface="serif" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/pw"
-        android:layout_toLeftOf="@+id/tabText"
-        android:text="@string/pw"
         android:textColor="@color/DarkOrange"
         android:textSize="15sp"
         android:typeface="serif" />
@@ -98,13 +46,55 @@
         android:hint="@string/exampleEmail"
         android:inputType="textEmailAddress" />
 
-    <Button
-        android:id="@+id/button2"
+    <EditText
+        android:id="@+id/pw"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/email"
+        android:layout_marginBottom="235dp"
+        android:ems="10"
+        android:hint="@string/examplePw"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tabText"
-        android:layout_marginTop="45dp"
-        android:layout_toLeftOf="@+id/register"
-        android:text="Button" />
+        android:layout_alignBottom="@+id/pw"
+        android:layout_toLeftOf="@+id/email"
+        android:text="@string/pw"
+        android:textColor="@color/DarkOrange"
+        android:textSize="15sp"
+        android:typeface="serif" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/email"
+        android:layout_marginBottom="229dp"
+        android:layout_marginRight="21dp"
+        android:background="@color/white"
+        android:minHeight="30dip"
+        android:minWidth="90dip"
+        android:text="@string/register"
+        android:textColor="@color/Orange"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/register"
+        android:layout_alignBottom="@+id/register"
+        android:layout_alignLeft="@+id/tabText"
+        android:background="@color/white"
+        android:minHeight="30dip"
+        android:minWidth="90dip"
+        android:text="@string/login"
+        android:textColor="@color/Orange"
+        android:textSize="25sp" />
 
 </RelativeLayout>

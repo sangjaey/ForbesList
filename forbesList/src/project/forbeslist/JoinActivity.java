@@ -71,6 +71,7 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 		return true;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 		if (arg1.getData() instanceof List) {

@@ -3,15 +3,11 @@ package dbLayout;
 import java.io.File;
 import java.util.ArrayList;
 
-import project.forbeslist.MainActivity;
-import project.forbeslist.SearchActivity;
 import util.Util;
 import android.app.Activity;
 
 import com.cloudbase.CBHelper;
 import com.cloudbase.CBHelperResponder;
-import com.cloudbase.datacommands.CBSearchCondition;
-import com.cloudbase.datacommands.CBSearchConditionOperator;
 
 /**
  * 

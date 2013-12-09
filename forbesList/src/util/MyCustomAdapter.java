@@ -1,5 +1,6 @@
 package util;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -13,13 +14,11 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import project.forbeslist.R;
-import project.forbeslist.R.id;
-import project.forbeslist.R.layout;
 
+
+@SuppressLint("CutPasteId")
 public class MyCustomAdapter extends BaseExpandableListAdapter {
 
 	private LayoutInflater inflater;

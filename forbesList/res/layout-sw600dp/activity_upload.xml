@@ -45,13 +45,13 @@
 
     <EditText
         android:id="@+id/title_u"
-        android:layout_width="320dp"
+        android:layout_width="480dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/author_u"
         android:layout_alignParentRight="true"
         android:ems="10"
         android:hint="@string/search_title" />
-
+<requestFocus />
     <EditText
         android:id="@+id/author_u"
         android:layout_width="320dp"
@@ -59,6 +59,7 @@
         android:layout_alignBaseline="@+id/upload_author"
         android:layout_alignBottom="@+id/upload_author"
         android:layout_alignLeft="@+id/title_u"
+        android:layout_alignRight="@+id/title_u"
         android:ems="10"
         android:hint="@string/search_author" />
 
@@ -111,10 +112,11 @@
         android:layout_alignBaseline="@+id/TextView01"
         android:layout_alignBottom="@+id/TextView01"
         android:layout_alignLeft="@+id/author_u"
+        android:layout_alignRight="@+id/author_u"
         android:ems="10"
         android:hint="@string/search_price" >
 
-        <requestFocus />
+        
     </EditText>
 
 </RelativeLayout>

@@ -44,5 +44,6 @@
     <string name="upload">Upload</string>
     <string name="takeSnapShot">Take Snapshot Now</string>
     <string name="search_price">Price</string>
+    <string name="img">img</string>
 
 </resources>

@@ -1,7 +1,5 @@
 package project.forbeslist;
  
-import java.util.List;
-
 import Adaptors.DBUser;
 import Builders.BuildUser;
 import android.app.Activity;

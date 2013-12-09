@@ -10,7 +10,6 @@ import location.LocationTrak;
 import Adaptors.NewBook;
 import Builders.BuildBook;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
