@@ -45,7 +45,7 @@
 
     <EditText
         android:id="@+id/title_u"
-        android:layout_width="480dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/author_u"
         android:layout_alignParentRight="true"

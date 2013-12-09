@@ -32,7 +32,7 @@
 
             <EditText
                 android:id="@+id/title_s"
-                android:layout_width="480dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/search_title"
                 android:layout_alignRight="@+id/bookList"
