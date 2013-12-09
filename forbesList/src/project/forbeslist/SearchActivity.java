@@ -9,6 +9,7 @@ import util.MyCustomAdapter;
 import util.Parent;
 import Adaptors.DBBook;
 import Builders.BuildBook;
+import Exceptions.DBException;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
@@ -41,14 +42,13 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 		Button searchBtn = (Button) findViewById(R.id.button_s);
 		mExpandableList = (ExpandableListView) findViewById(R.id.bookList);
 		searchBtn.setOnClickListener(new OnClickListener() {
+			
 			@Override
-			public void onClick(View v) { // TODO Auto-generated method stub
+			public void onClick(View v) {
 				boolean nonNullFlag = false;
 				arrayParents = new ArrayList<Parent>();
 				EditText tText = (EditText) findViewById(R.id.title_s);
-		//		EditText aText = (EditText) findViewById(R.id.author_s);
 				String title = tText.getText().toString();
-			//	String author = aText.getText().toString();
 				nonNullFlag = !(title.equals(""));
 				if (nonNullFlag) {
 					MainActivity.BookDao.read(title, "title",
@@ -69,37 +69,27 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 	public void handleResponse(CBQueuedRequest arg0, CBHelperResponse arg1) {
 
 		if (arg1.getFunction().equals("download")) {
-			System.out.println("DL handler starting");
+
 			if (arg1.getDownloadedFile() != null) {
-				System.out.println("DL complete");
 				Uri imageUri = Uri.fromFile(arg1.getDownloadedFile());
 				String strUri = "###" + imageUri.toString();
 				for (int i = 0; i < arrayParents.size(); i++) {
 					Parent p = arrayParents.get(i);
-					
 					// if file id equals strUri parsed..
 					String fileid = p.getFileId();
-					System.out.println("fileid: " + fileid);
-					System.out.println("uri: " + strUri.substring(46, 78));
 					if (fileid != null
 							&& fileid.equals(strUri.substring(46, 78))) {
-						System.out.println("DL received for imaging");
 						p.addFileId(strUri);
 						arrayParents.set(i, p);
 						adap.notifyDataSetChanged();
 					}
 				}
 			}
-		}
-
-		// TODO Auto-generated method stub
-
-		else if (arg1.getData() instanceof List) {
+		} else if (arg1.getData() instanceof List) {
 			
 			List<?> results = (List<?>) arg1.getData();
 
 			for (int i = 0; i < results.size(); i++) {
-				System.out.println("LOOP START");
 				
 				//Build Book
 				DBBook dbBook = new BuildBook();
@@ -120,28 +110,18 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 					String file_id = (arr.get(0)).toString().substring(9, 41);
 					parent.addFileId(file_id);
 					if (file_id != null) {
-						System.out.println("fileid: " + file_id);
 						MainActivity.BookDao.readFile(file_id,
 								SearchActivity.this);
-						System.out.println("DL command issued");
 					}
 				}
-				
 				//add new parent to parent array
 				arrayParents.add(parent);
-				System.out.println("LOOP END");
 			}
 			// sets the adapter that provides data to the list.
-			System.out.println("Adapter Set");
 			adap = new MyCustomAdapter(SearchActivity.this, arrayParents);
 			adap.notifyDataSetChanged();
 			mExpandableList.setAdapter(adap);
 		}
-
-		else {
-			System.out.println("###################" + arg1.getData());
-		}
-
 	}
 	private String getGeoLocation(DBBook dbBook){
 		String msg;
@@ -154,7 +134,6 @@ public class SearchActivity extends Activity implements CBHelperResponder {
 			try {
 				addresses = geocoder.getFromLocation(dbBook.getLat(), dbBook.getLon(), 1);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

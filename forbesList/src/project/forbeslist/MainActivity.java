@@ -106,8 +106,8 @@ public class MainActivity extends Activity implements CBHelperResponder {
 						"email and password doesnt match", Toast.LENGTH_LONG);
 				toast.show();
 			}
-		} else {
+		} /*else {
 			System.out.println("###################" + arg1.getData());
-		}
+		}*/
 	}
 }

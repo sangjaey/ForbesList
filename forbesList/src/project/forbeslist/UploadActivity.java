@@ -3,6 +3,7 @@ package project.forbeslist;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import location.LocationTrak;
@@ -47,11 +48,8 @@ public class UploadActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_upload);
 		mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		if(mlocManager==null){
-			System.out.println("AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHH");
-		}
+		
 		File file = new File(Environment.getExternalStorageDirectory(), "Pic.jpg");
-
 		if(file.exists()){
 			file.delete();
 		}
@@ -83,7 +81,7 @@ public class UploadActivity extends Activity {
 				String author = aText.getText().toString();
 				String price = pText.getText().toString();
 				nonNullFlag = !(title.equals("") || author.equals("")||price.equals(""));
-//				Book in = null;
+
 				if(nonNullFlag){
 					NewBook newBook = new BuildBook();
 					newBook.buildBookFromInput(title, author, location, price, uploader);
@@ -126,51 +124,7 @@ public class UploadActivity extends Activity {
 				startActivityForResult(intent, TAKE_PICTURE);
 			}       	
 		});
-
-		/*
-		 * 
-		mlocListener = new LocationListener() {
-			@Override
-			public void onLocationChanged(Location location) {
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
-
-				if (location != null) {
-					Toast.makeText(
-							getBaseContext(),
-							"New location latitude [" + location.getLatitude()
-									+ "] longitude [" + location.getLongitude()
-									+ "]", Toast.LENGTH_SHORT).show();
-				}
-			}
-
-			@Override
-			public void onProviderDisabled(String provider) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), "No provider available",
-						Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onProviderEnabled(String provider) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), "Provider enabled!",
-						Toast.LENGTH_SHORT).show();
-
-			}
-
-			@Override
-			public void onStatusChanged(String provider, int status,
-					Bundle extras) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), "GPS status changed",
-						Toast.LENGTH_SHORT).show();
-			}
-		};
-
-		 */
 		mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 1, LocationTrak.mlocListener);
-
-
 	}
 	private Bitmap checkifImageRotated() {
 		ExifInterface exif;
@@ -197,7 +151,7 @@ public class UploadActivity extends Activity {
 				return bmpRotated;
 			}
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -212,7 +166,7 @@ public class UploadActivity extends Activity {
 				Uri selectedImage = imageUri;
 				getContentResolver().notifyChange(selectedImage, null);
 				ImageView imageView = (ImageView) findViewById(R.id.imageView);
-				ContentResolver cr = getContentResolver();
+//				ContentResolver cr = getContentResolver();
 				Bitmap bitmap;
 				try {
 					//bitmap = android.provider.MediaStore.Images.Media

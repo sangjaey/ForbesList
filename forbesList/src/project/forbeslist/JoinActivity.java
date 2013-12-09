@@ -51,16 +51,12 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 				name = nameText.getText().toString();
 				phonenumber = phoneText.getText().toString();
 				password = passwordText.getText().toString();
-				
-				if(email.isEmpty()||
-						name.isEmpty()||
-						phonenumber.isEmpty()||
-						password.isEmpty()){
 
-						Toast toast = Toast.makeText(getApplicationContext(),
-								"You must fill all the fields",
-								Toast.LENGTH_LONG);
-						toast.show();
+				if(email.isEmpty()|| name.isEmpty()|| phonenumber.isEmpty()||password.isEmpty()){
+					Toast toast = Toast.makeText(getApplicationContext(),
+							"You must fill all the fields",
+							Toast.LENGTH_LONG);
+					toast.show();
 					return;
 				}
 				MainActivity.UserDao.read(email,"email" ,JoinActivity.this);
@@ -82,10 +78,10 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 			if (results.size() == 0) {
 				validEmail = true;
 			}
-		} else{
+		} /*else{
 			System.out.println("###################" + arg1.getData());			
-		}
-		
+		}*/
+
 		if(!validEmail){
 			TextView error_text = (TextView)findViewById(R.id.register_error);
 			error_text.setText("Email Already In use");
@@ -111,7 +107,4 @@ public class JoinActivity extends Activity implements CBHelperResponder{
 		super.onResume();
 		validEmail = false;
 	}
-	
-	
-
 }

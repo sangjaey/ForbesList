@@ -27,11 +27,6 @@ public class ProfileActivity extends Activity implements CBHelperResponder{
 
         
 		String userEmail = getIntent().getExtras().getString("userName");
-		System.out.println("ashdfjkasdjfkajskl"+userEmail);
-		/*CBSearchCondition cond = new CBSearchCondition(
-				"email",
-				CBSearchConditionOperator.CBOperatorEqual, userEmail);
-		MainActivity.myHelper.searchDocument("test", cond, ProfileActivity.this);*/
 		MainActivity.UserDao.read(userEmail, "email",ProfileActivity.this);
     }
 	
@@ -45,10 +40,6 @@ public class ProfileActivity extends Activity implements CBHelperResponder{
 		email = dbUser.getEmail();
 		name = dbUser.getName();
 		phonenumber = dbUser.getPhonenumber();
-		
-//		email = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("email");
-//		name = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("name");
-//		phonenumber = (String)((com.google.gson.internal.StringMap)((List)arg1.getData()).get(0)).get("phonenumber");
 		
 		nameView.setText(name);
 		emailView.setText(email);
